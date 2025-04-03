@@ -5,7 +5,7 @@ import App from './App';
 const rootElement = document.getElementById('root');
 
 if (rootElement) {
-    const root = ReactDOM.createRoot(rootElement as HTMLElement); // Ensure proper type assertion
+    const root = ReactDOM.createRoot(rootElement as HTMLElement);
     root.render(
         React.createElement(
             React.StrictMode,
