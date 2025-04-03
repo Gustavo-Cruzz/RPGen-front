@@ -35,7 +35,7 @@ function App() {
 
   const saveCharacter = () => {
     localStorage.setItem('dndCharacter', JSON.stringify(character));
-    alert('Character saved successfully!');
+    alert('Not ready yet!');
   };
 
   const loadCharacter = () => {
@@ -47,16 +47,16 @@ function App() {
 
   const generateTextWithLLM = async () => {
     setIsGeneratingText(true);
-    // Simulate API call to LLM
+    // placeholder
     setTimeout(() => {
-      setGeneratedText(`This is a generated character backstory for ${character.name}, a ${character.race} ${character.class}. ${character.age ? `At ${character.age} years old, ` : ''}they stand ${character.height} tall with ${character.hairColor} hair and ${character.eyeColor} eyes. Their journey began when...`);
+      setGeneratedText(`blablablablablablablablablablablabla`);
       setIsGeneratingText(false);
     }, 2000);
   };
 
   const generateImageWithHuggingFace = async () => {
     setIsGeneratingImage(true);
-    // Simulate API call to Hugging Face
+    // placeholder
     setTimeout(() => {
       setGeneratedImageUrl('https://via.placeholder.com/300x400?text=Generated+Character+Image');
       setIsGeneratingImage(false);
@@ -71,7 +71,7 @@ function App() {
     <div className="app">
       <header>
         <h1>D&D 5E Character Sheet</h1>
-        <button onClick={saveCharacter} className="save-btn">Save Character</button>
+        <button onClick={saveCharacter} className="save-btn">Save Character<p>(coming soon!)</p></button>
       </header>
 
       <div className="character-sheet">
