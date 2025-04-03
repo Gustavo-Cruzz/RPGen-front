@@ -1,8 +1,9 @@
 import "./App.css";
 import InputField from "./components/InputField/InputField";
+import ImageField from "./components/ImageField/ImageField";
+
 
 function App() {
-  // const name: string = "Name";
   return (
     <div className="App">
       <header>
@@ -16,8 +17,9 @@ function App() {
         </div>
         <div className="char-sheet">
           <h4>Character Sheet</h4>
-          <InputField input_text={"Name"}/>
-          <InputField input_text={"Class"}/>
+          <ImageField/>
+          <InputField input_text={"Name"} />
+          <InputField input_text={"Class"} />
         </div>
       </body>
     </div>
