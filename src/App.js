@@ -47,22 +47,56 @@ function App() {
 
   const generateTextWithLLM = async () => {
     setIsGeneratingText(true);
-    // placeholder
-    setTimeout(() => {
-      setGeneratedText(`blablablablablablablablablablablabla`);
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/gerar-texto`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt: character.description }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setGeneratedText(data.texto_gerado);
+      } else {
+        console.error('Failed to generate text:', response.statusText);
+        setGeneratedText('Failed to generate backstory.');
+      }
+    } catch (error) {
+      console.error('Error generating text:', error);
+      setGeneratedText('Error generating backstory.');
+    } finally {
       setIsGeneratingText(false);
-    }, 2000);
+    }
   };
 
   const generateImageWithHuggingFace = async () => {
     setIsGeneratingImage(true);
-    // placeholder
-    setTimeout(() => {
-      setGeneratedImageUrl('https://via.placeholder.com/300x400?text=Generated+Character+Image');
-      setIsGeneratingImage(false);
-    }, 3000);
-  };
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/gerar-imagem`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt: character.name }),
+      });
 
+      if (response.ok) {
+        const data = await response.json();
+        setGeneratedImageUrl(`data:image/png;base64,${data.imagem_base64}`);
+      } else {
+        console.error('Failed to generate image:', response.statusText);
+        setGeneratedImageUrl('');
+      }
+    } catch (error) {
+      console.error('Error generating image:', error);
+      setGeneratedImageUrl('');
+    } finally {
+      setIsGeneratingImage(false);
+    }
+  };
+  
   useEffect(() => {
     loadCharacter();
   }, []);
