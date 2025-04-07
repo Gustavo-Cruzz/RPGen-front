@@ -6,7 +6,8 @@ const Header = ({ saveCharacter }) => {
       <h1>D&D 5E Character Sheet</h1>
       <button onClick={saveCharacter} className="save-btn">
         Save Character
-        <span className="save-tooltip">(Saved to browser storage)</span>
+        <br/>
+        <span className="save-tooltip"><h6>(Work In Progress)</h6></span>
       </button>
     </header>
   );
