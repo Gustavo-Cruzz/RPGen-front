@@ -26,12 +26,20 @@ export const useCharacter = () => {
   const [generatedImageUrl, setGeneratedImageUrl] = useState("");
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    var { name, value } = e.target;
+    if (name === "height"){
+      value = value + "cm"
+    }
+    if (name === "weight"){
+      value = value + "kg"
+    }
+    if (name === "age"){
+      value = value + " years old"
+    }
     console.groupCollapsed(`Updating character.${name}`);
     console.log('Previous value:', character[name]);
     console.log('New value:', value);
     console.groupEnd();
-    
     setCharacter((prev) => ({
       ...prev,
       [name]: value,

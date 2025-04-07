@@ -1,5 +1,5 @@
 import React from "react";
-import TextInput from "../input/TextInput";
+import TextInput from "../inputArea/TextInput";
 import GenerationSection from "./GenerationSection";
 
 const RightColumn = ({

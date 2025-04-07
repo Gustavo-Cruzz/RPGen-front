@@ -1,6 +1,6 @@
 import React from "react";
-import SimpleInput from "../input/SimpleInput";
-import TextInput from "../input/TextInput";
+import SimpleInput from "../inputArea/SimpleInput";
+import TextInput from "../inputArea/TextInput";
 
 const LeftColumn = ({ handleInputChange }) => {
   return (
@@ -32,7 +32,7 @@ const LeftColumn = ({ handleInputChange }) => {
         </div>
         <div className="form-row">
           <SimpleInput
-            type="text"
+            type="number"
             input_id="age"
             label="Age"
             placeholder="e.g. 25"
@@ -40,18 +40,18 @@ const LeftColumn = ({ handleInputChange }) => {
             onChange={handleInputChange}
           />
           <SimpleInput
-            type="text"
+            type="number"
             input_id="height"
-            label="Height"
-            placeholder="e.g. 160cm"
+            label="Height (cm)"
+            placeholder="e.g. 160"
             value={FormData.characterHeight}
             onChange={handleInputChange}
           />
           <SimpleInput
-            type="text"
+            type="number"
             input_id="weight"
-            label="Weight"
-            placeholder="e.g. 80Kg"
+            label="Weight (Kg)"
+            placeholder="e.g. 80"
             value={FormData.characterWeight}
             onChange={handleInputChange}
           />

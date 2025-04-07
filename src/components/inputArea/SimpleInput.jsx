@@ -8,8 +8,7 @@ const SimpleInput = ({
   placeholder = '',
   className = 'form-group',
   onChange
-}) => {
-  return (
+}) => {return (
     <div className={className}>
       <label htmlFor={input_id}>{label}</label>
       <input
@@ -19,6 +18,7 @@ const SimpleInput = ({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        min={type === 'number' ? 0 : undefined}
       />
     </div>
   );

@@ -116,7 +116,7 @@ label {
   font-family: "Modesto Condensed", serif;
 }
 
-input[type="text"],
+input,
 textarea {
   width: 100%;
   padding: 10px;
