@@ -1,6 +1,6 @@
 import React from "react";
-import SimpleInput from "../Input/SimpleInput";
-import TextInput from "../Input/TextInput";
+import SimpleInput from "../input/SimpleInput";
+import TextInput from "../input/TextInput";
 
 const LeftColumn = ({ handleInputChange }) => {
   return (

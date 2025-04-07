@@ -1,5 +1,7 @@
 import React from "react";
-import TextInput from "../Input/TextInput";
+import TextInput from "../input/TextInput";
+import GenerationSection from "./GenerationSection";
+
 const RightColumn = ({
   character,
   handleInputChange,
@@ -12,55 +14,15 @@ const RightColumn = ({
 }) => {
   return (
     <div className="right-column">
-      <div className="generation-section">
-        <h2>AI Generation</h2>
-        <button
-          onClick={generateTextWithLLM}
-          disabled={isGeneratingText}
-          className="generate-btn"
-        >
-          {isGeneratingText ? (
-            <span className="generating-text">Generating Backstory...</span>
-          ) : (
-            "Generate Backstory"
-          )}
-        </button>
-
-        <button
-          onClick={generateImageWithHuggingFace}
-          disabled={isGeneratingImage}
-          className="generate-btn"
-        >
-          {isGeneratingImage ? (
-            <span className="generating-text">Generating Image...</span>
-          ) : (
-            "Generate Character Image"
-          )}
-        </button>
-
-        {generatedText && (
-          <div className="generated-output">
-            <h3>Generated Backstory</h3>
-            <p>{generatedText}</p>
-          </div>
-        )}
-
-        {generatedImageUrl && (
-          <div className="generated-image">
-            <h3>Generated Character Image</h3>
-            <img
-              src={generatedImageUrl}
-              alt={`Generated portrait of ${character.name}`}
-            />
-            <button
-              className="download-btn"
-              onClick={() => window.open(generatedImageUrl, "_blank")}
-            >
-              Download Image
-            </button>
-          </div>
-        )}
-      </div>
+      <GenerationSection
+        character={character}
+        isGeneratingText={isGeneratingText}
+        isGeneratingImage={isGeneratingImage}
+        generateTextWithLLM={generateTextWithLLM}
+        generateImageWithHuggingFace={generateImageWithHuggingFace}
+        generatedText={generatedText}
+        generatedImageUrl={generatedImageUrl}
+      />
       <TextInput
         input_id="traits"
         label="Additional Traits & Talents"
