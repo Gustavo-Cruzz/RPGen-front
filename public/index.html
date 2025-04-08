@@ -7,36 +7,89 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="RPG Character Generator - Create your perfect D&D character"
     />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
     <title>RPGen</title>
+    <style>
+      /* Estilos temporários para a animação - serão substituídos pelo React */
+      .intro-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #1a1a1a;
+        color: #fff;
+        z-index: 1000;
+      }
+      
+      .typing-text {
+        font-size: 2.5rem;
+        font-family: 'Courier New', monospace;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+      
+      .cursor {
+        animation: blink 1s infinite;
+        font-size: 2.5rem;
+      }
+      
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+      
+      /* Garante que o conteúdo principal fique escondido durante a animação */
+      .main-content {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    
+    <!-- Container para a animação de introdução -->
+    <div id="intro-animation" class="intro-container">
+      <div id="typing" class="typing-text"></div>
+      <span class="cursor">|</span>
+    </div>
+    
+    <!-- Container principal do React -->
+    <div id="root" class="main-content"></div>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    <script>
+      // Script temporário para a animação - será substituído pelo React
+      document.addEventListener("DOMContentLoaded", function() {
+        const typingElement = document.getElementById("typing");
+        const introContainer = document.getElementById("intro-animation");
+        const rootElement = document.getElementById("root");
+        const text = "RPGen";
+        let index = 0;
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+        function typeEffect() {
+          if (index < text.length) {
+            typingElement.innerHTML = text.substring(0, index + 1);
+            index++;
+            setTimeout(typeEffect, 150);
+          } else {
+            setTimeout(() => {
+              introContainer.style.opacity = "0";
+              setTimeout(() => {
+                introContainer.style.display = "none";
+                rootElement.classList.remove("main-content");
+              }, 1000);
+            }, 1000);
+          }
+        }
+
+        setTimeout(typeEffect, 500);
+      });
+    </script>
   </body>
 </html>
