@@ -48,7 +48,7 @@ function App() {
   const generateTextWithLLM = async () => {
     setIsGeneratingText(true);
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/gerar-texto`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}api/gerar-texto`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ function App() {
   const generateImage = async () => {
     setIsGeneratingImage(true);
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/gerar-imagem`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}api/gerar-imagem`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
