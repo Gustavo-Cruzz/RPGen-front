@@ -53,7 +53,7 @@ function App() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt: character.description }),
+        body: JSON.stringify({ prompt: 'Make a backstory for a D&D character using this information as base:' + 'Name:' + character.name + 'Class:' + character.class + 'Race:' + character.race + 'Age:' + character.age + 'Height:' + character.height + 'Weight:' + character.weight + 'eyeColor:' + character.eyeColor + 'skinColor:' + character.skinColor + 'hairColor:' + character.hairColor + 'description:' + character.description + 'allies:' + character.allies + 'notes:' + character.notes + 'traits:' + character.traits  + 'equipment:' + character.equipment}),
       });
 
       if (response.ok) {
@@ -79,7 +79,7 @@ function App() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt: character.name }),
+        body: JSON.stringify({ prompt: 'Make an image for a D&D character using this information as base:' + 'Name:' + character.name + 'Class:' + character.class + 'Race:' + character.race + 'Age:' + character.age + 'Height:' + character.height + 'Weight:' + character.weight + 'eyeColor:' + character.eyeColor + 'skinColor:' + character.skinColor + 'hairColor:' + character.hairColor + 'description:' + character.description + 'allies:' + character.allies + 'notes:' + character.notes + 'traits:' + character.traits  + 'equipment:' + character.equipment + 'History:' + character.history}),
       });
 
       if (response.ok) {
