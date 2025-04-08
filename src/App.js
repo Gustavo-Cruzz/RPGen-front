@@ -71,7 +71,7 @@ function App() {
     }
   };
 
-  const generateImageWithHuggingFace = async () => {
+  const generateImage = async () => {
     setIsGeneratingImage(true);
     try {
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/gerar-imagem`, {
@@ -274,7 +274,7 @@ function App() {
             </button>
             
             <button 
-              onClick={generateImageWithHuggingFace} 
+              onClick={generateImage} 
               disabled={isGeneratingImage}
               className="generate-btn"
             >
