@@ -72,29 +72,29 @@ function App() {
   };
 
   const generateImage = async () => {
-    setIsGeneratingImage(true);
-    try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}api/gerar-imagem`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ prompt: 'Make an image for a D&D character using this information as base:' + 'Name:' + character.name + 'Class:' + character.class + 'Race:' + character.race + 'Age:' + character.age + 'Height:' + character.height + 'Weight:' + character.weight + 'eyeColor:' + character.eyeColor + 'skinColor:' + character.skinColor + 'hairColor:' + character.hairColor + 'description:' + character.description + 'allies:' + character.allies + 'notes:' + character.notes + 'traits:' + character.traits  + 'equipment:' + character.equipment + 'History:' + character.history}),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setGeneratedImageUrl(`data:image/png;base64,${data.imagem_base64}`);
-      } else {
-        console.error('Failed to generate image:', response.statusText);
-        setGeneratedImageUrl('');
-      }
-    } catch (error) {
-      console.error('Error generating image:', error);
-      setGeneratedImageUrl('');
-    } finally {
-      setIsGeneratingImage(false);
-    }
+    alert('Not ready yet!');
+    //setIsGeneratingImage(true);
+    //try {
+    //  const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}api/gerar-imagem`, {
+    //    method: 'POST',
+    //    headers: {
+    //      'Content-Type': 'application/json',
+    //    },
+    //    body: JSON.stringify({ prompt: 'Make an image for a D&D character using this information as base:' + 'Name:' + character.name + 'Class:' + character.class + 'Race:' + character.race + 'Age:' + character.age + 'Height:' + character.height + 'Weight:' + character.weight + 'eyeColor:' + character.eyeColor + 'skinColor:' + character.skinColor + 'hairColor:' + character.hairColor + 'description:' + character.description + 'allies:' + character.allies + 'notes:' + character.notes + 'traits:' + character.traits  + 'equipment:' + character.equipment + 'History:' + character.history}),
+    //  });
+    //  if (response.ok) {
+    //    const data = await response.json();
+    //    setGeneratedImageUrl(`data:image/png;base64,${data.imagem_base64}`);
+    //  } else {
+    //    console.error('Failed to generate image:', response.statusText);
+    //    setGeneratedImageUrl('');
+    //  }
+   // } catch (error) {
+   //   console.error('Error generating image:', error);
+   //   setGeneratedImageUrl('');
+   // } finally {
+   //   setIsGeneratingImage(false);
+   // }
   };
   
   useEffect(() => {
