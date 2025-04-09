@@ -278,7 +278,7 @@ function App() {
               disabled={isGeneratingImage}
               className="generate-btn"
             >
-              {isGeneratingImage ? 'Generating...' : 'Generate Character Image(coming soon!)'}
+              {isGeneratingImage ? 'Generating...' : 'Generate Character Image \n (coming soon!)'}
             </button>
 
             {generatedText && (
