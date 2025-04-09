@@ -88,33 +88,33 @@ export const useCharacter = () => {
           body: JSON.stringify({
             prompt:
               "Make a backstory for a D&D character using this information as base:" +
-              "Name:" +
+              "\nName:" +
               character.name +
-              "Class:" +
+              "\nClass:" +
               character.class +
-              "Race:" +
+              "\nRace:" +
               character.race +
-              "Age:" +
+              "\nAge:" +
               character.age +
-              "Height:" +
+              "\nHeight:" +
               character.height +
-              "Weight:" +
+              "\nWeight:" +
               character.weight +
-              "eyeColor:" +
+              "\nEye color:" +
               character.eyeColor +
-              "skinColor:" +
+              "\nSkin color:" +
               character.skinColor +
-              "hairColor:" +
+              "\nHair color:" +
               character.hairColor +
-              "description:" +
+              "\nDescription:" +
               character.description +
-              "allies:" +
+              "\nAllies:" +
               character.allies +
-              "notes:" +
+              "\nNotes:" +
               character.notes +
-              "traits:" +
+              "\nTraits:" +
               character.traits +
-              "equipment:" +
+              "\nEquipment:" +
               character.equipment,
           }),
         }
