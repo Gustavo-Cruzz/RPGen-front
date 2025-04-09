@@ -12,7 +12,7 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>RPGen</title>
     <style>
-      /* Estilos temporários para a animação - serão substituídos pelo React */
+      /* Estilos para a animação da logo */
       .intro-container {
         position: fixed;
         top: 0;
@@ -20,32 +20,32 @@
         width: 100%;
         height: 100%;
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
         background: #1a1a1a;
-        color: #fff;
         z-index: 1000;
+        opacity: 1;
+        transition: opacity 1s ease-out;
       }
       
-      .typing-text {
-        font-size: 2.5rem;
-        font-family: 'Courier New', monospace;
-        font-weight: bold;
-        margin-bottom: 20px;
+      .intro-logo {
+        max-width: 300px;
+        width: 80%;
+        height: auto;
+        animation: fadeIn 1.5s ease-out;
       }
       
-      .cursor {
-        animation: blink 1s infinite;
-        font-size: 2.5rem;
+      @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.8); }
+        to { opacity: 1; transform: scale(1); }
       }
       
-      @keyframes blink {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0; }
+      /* Efeito de saída */
+      .intro-container.fade-out {
+        opacity: 0;
       }
       
-      /* Garante que o conteúdo principal fique escondido durante a animação */
+      /* Esconde o conteúdo principal inicialmente */
       .main-content {
         display: none;
       }
@@ -54,41 +54,31 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     
-    <!-- Container para a animação de introdução -->
+    <!-- Container para a animação da logo -->
     <div id="intro-animation" class="intro-container">
-      <div id="typing" class="typing-text"></div>
-      <span class="cursor">|</span>
+      <img src="./images/rpgenlogo.png" alt="RPGen Logo" class="intro-logo" />
     </div>
     
     <!-- Container principal do React -->
     <div id="root" class="main-content"></div>
 
     <script>
-      // Script temporário para a animação - será substituído pelo React
+      // Script para exibir a logo e depois mostrar o conteúdo principal
       document.addEventListener("DOMContentLoaded", function() {
-        const typingElement = document.getElementById("typing");
         const introContainer = document.getElementById("intro-animation");
         const rootElement = document.getElementById("root");
-        const text = "RPGen";
-        let index = 0;
-
-        function typeEffect() {
-          if (index < text.length) {
-            typingElement.innerHTML = text.substring(0, index + 1);
-            index++;
-            setTimeout(typeEffect, 150);
-          } else {
-            setTimeout(() => {
-              introContainer.style.opacity = "0";
-              setTimeout(() => {
-                introContainer.style.display = "none";
-                rootElement.classList.remove("main-content");
-              }, 1000);
-            }, 1000);
-          }
-        }
-
-        setTimeout(typeEffect, 500);
+        
+        // Tempo que a logo ficará visível (3 segundos)
+        setTimeout(() => {
+          introContainer.classList.add('fade-out');
+          
+          // Mostra o conteúdo principal após a animação de fade-out
+          setTimeout(() => {
+            introContainer.style.display = "none";
+            rootElement.classList.remove("main-content");
+          }, 1000); // Tempo da animação de fade-out
+          
+        }, 3000); // Tempo de exibição da logo
       });
     </script>
   </body>

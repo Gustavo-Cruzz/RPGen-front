@@ -1,36 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import './components/IntroAnimation.css';
+import logo from './components/assets/images/rpgenlogo.png'; 
 
-// Componente de Introdução
-const IntroAnimation = ({ onComplete }) => {
-  useEffect(() => {
-    const typingElement = document.getElementById("typing");
-    const introContainer = document.querySelector(".intro-container");
-    const text = "RPGen";
-    let index = 0;
-
-    const typeEffect = () => {
-      if (index < text.length) {
-        typingElement.innerHTML = text.substring(0, index + 1);
-        index++;
-        setTimeout(typeEffect, 150);
-      } else {
-        setTimeout(() => {
-          if (onComplete) onComplete();
-        }, 1000);
-      }
-    };
-
-    setTimeout(typeEffect, 500);
-  }, [onComplete]);
-
-  return (
-    <div className="intro-container">
-      <div id="typing" className="typing-text"></div>
-      <span className="cursor">|</span>
-    </div>
-  );
-};
 
 function App() {
   const [showMain, setShowMain] = useState(false);
