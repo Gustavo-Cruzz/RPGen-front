@@ -121,6 +121,8 @@ export const useCharacter = () => {
       console.log("Backend URL:", backend_url);
       if (response.ok) {
         const data = await response.json();
+        console.log(JSON.stringify(data, null, 2))
+        
         setGeneratedText(data.texto_gerado);
         characterUpdate("history", data.texto_gerado);
       } else {
