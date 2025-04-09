@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import './components/IntroAnimation.css';
-import logo from './components/assets/images/rpgenlogo.png'; 
+
 
 
 function App() {
