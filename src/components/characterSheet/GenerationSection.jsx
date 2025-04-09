@@ -31,13 +31,6 @@ const GenerationSection = ({
         />
       </div>
 
-      {generatedText && (
-        <div className="generated-output">
-          <h3>Generated Backstory</h3>
-          <p>{generatedText}</p>
-        </div>
-      )}
-
       {generatedImageUrl && (
         <div className="generated-image">
           <h3>Generated Character Image</h3>
