@@ -25,7 +25,7 @@ export const useCharacter = () => {
   const [generatedText, setGeneratedText] = useState("");
   const [generatedImageUrl, setGeneratedImageUrl] = useState("");
 
-  const characterUpdate = (name,value) => {
+  const characterUpdate = (name, value) => {
     console.groupCollapsed(`Updating character.${name}`);
     console.log("Previous value:", character[name]);
     console.log("New value:", value);
@@ -76,49 +76,48 @@ export const useCharacter = () => {
 
   const generateTextWithLLM = async () => {
     setIsGeneratingText(true);
-    const backend_url = `${process.env.REACT_APP_BACKEND_URL}api/gerar-texto`
+    const backend_url = `${process.env.REACT_APP_BACKEND_URL}api/gerar-texto`;
     try {
-      const response = await fetch(
-        backend_url,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            prompt:
-              "Make a backstory for a D&D character using this information as base:" +
-              "\nName:" +
-              character.name +
-              "\nClass:" +
-              character.class +
-              "\nRace:" +
-              character.race +
-              "\nAge:" +
-              character.age +
-              "\nHeight:" +
-              character.height +
-              "\nWeight:" +
-              character.weight +
-              "\nEye color:" +
-              character.eyeColor +
-              "\nSkin color:" +
-              character.skinColor +
-              "\nHair color:" +
-              character.hairColor +
-              "\nDescription:" +
-              character.description +
-              "\nAllies:" +
-              character.allies +
-              "\nNotes:" +
-              character.notes +
-              "\nTraits:" +
-              character.traits +
-              "\nEquipment:" +
-              character.equipment,
-          }),
-        }
-      );
+      const response = await fetch(backend_url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          prompt:
+            "Make a backstory for a D&D character using this information as base:" +
+            "\nName:" +
+            character.name +
+            "\nClass:" +
+            character.class +
+            "\nRace:" +
+            character.race +
+            "\nAge:" +
+            character.age +
+            "\nHeight:" +
+            character.height +
+            "\nWeight:" +
+            character.weight +
+            "\nEye color:" +
+            character.eyeColor +
+            "\nSkin color:" +
+            character.skinColor +
+            "\nHair color:" +
+            character.hairColor +
+            "\nDescription:" +
+            character.description +
+            "\nAllies:" +
+            character.allies +
+            "\nNotes:" +
+            character.notes +
+            "\nTraits:" +
+            character.traits +
+            "\nEquipment:" +
+            character.equipment +
+            "." +
+            "\n Write only the backstory, no other information or text.",
+        }),
+      });
       console.log("Backend URL:", backend_url);
       if (response.ok) {
         const data = await response.json();
