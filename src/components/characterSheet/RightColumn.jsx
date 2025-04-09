@@ -35,7 +35,7 @@ const RightColumn = ({
         label="Character History"
         placeholder="Background story, significant life events, and motivations..."
         rows="6"
-        value={FormData.characterHistory}
+        value={character.history}
         onChange={handleInputChange}
       />
       <TextInput
