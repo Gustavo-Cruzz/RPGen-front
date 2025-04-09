@@ -8,7 +8,6 @@ const GenerationSection = ({
   isGeneratingImage,
   generateTextWithLLM,
   generateImageWithHuggingFace,
-  generatedText,
   generatedImageUrl,
 }) => {
   return (
@@ -27,7 +26,7 @@ const GenerationSection = ({
           onClick={generateImageWithHuggingFace}
           disabled={isGeneratingImage}
           loadingText="Generating Image..."
-          defaultText="Generate Character Image"
+          defaultText="Image Gen - Work In Progress"
         />
       </div>
 
