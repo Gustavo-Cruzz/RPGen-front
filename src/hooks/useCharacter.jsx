@@ -121,10 +121,9 @@ export const useCharacter = () => {
       console.log("Backend URL:", backend_url);
       if (response.ok) {
         const data = await response.json();
-        console.log(JSON.stringify(data, null, 2))
         
-        setGeneratedText(data.texto_gerado);
-        characterUpdate("history", data.texto_gerado);
+        setGeneratedText(data["Generated Text"]);
+        characterUpdate("history", data["Generated Text"]);
       } else {
         console.error("Failed to generate text:", response.statusText);
         setGeneratedText("Failed to generate backstory.");
