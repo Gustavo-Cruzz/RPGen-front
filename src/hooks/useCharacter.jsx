@@ -4,6 +4,7 @@ const initialCharacterState = {
   name: "",
   class: "",
   race: "",
+  gender: "",
   age: "",
   height: "",
   weight: "",
@@ -92,6 +93,8 @@ export const useCharacter = () => {
             character.class +
             "\nRace:" +
             character.race +
+            "\nGender:" +
+            character.gender +
             "\nAge:" +
             character.age +
             "\nHeight:" +
@@ -121,7 +124,7 @@ export const useCharacter = () => {
       console.log("Backend URL:", backend_url);
       if (response.ok) {
         const data = await response.json();
-        
+
         setGeneratedText(data["Generated Text"]);
         characterUpdate("history", data["Generated Text"]);
       } else {
@@ -149,35 +152,37 @@ export const useCharacter = () => {
           body: JSON.stringify({
             prompt:
               "Make an image for a D&D character using this information as base:" +
-              "Name:" +
+              "\nName:" +
               character.name +
-              "Class:" +
+              "\nClass:" +
               character.class +
-              "Race:" +
+              "\nRace:" +
               character.race +
-              "Age:" +
+              "\nGender:" +
+              character.gender +
+              "\nAge:" +
               character.age +
-              "Height:" +
+              "\nHeight:" +
               character.height +
-              "Weight:" +
+              "\nWeight:" +
               character.weight +
-              "eyeColor:" +
+              "\neyeColor:" +
               character.eyeColor +
-              "skinColor:" +
+              "\nskinColor:" +
               character.skinColor +
-              "hairColor:" +
+              "\nhairColor:" +
               character.hairColor +
-              "description:" +
+              "\ndescription:" +
               character.description +
-              "allies:" +
+              "\nallies:" +
               character.allies +
-              "notes:" +
+              "\nnotes:" +
               character.notes +
-              "traits:" +
+              "\ntraits:" +
               character.traits +
-              "equipment:" +
+              "\nequipment:" +
               character.equipment +
-              "History:" +
+              "\nHistory:" +
               character.history,
           }),
         }

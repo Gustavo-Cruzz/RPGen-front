@@ -29,6 +29,13 @@ const LeftColumn = ({ handleInputChange }) => {
             value={FormData.characterRace}
             onChange={handleInputChange}
           />
+          <SimpleInput
+            input_id="gender"
+            label="Gender"
+            placeholder="e.g. Female"
+            value={FormData.characterGender}
+            onChange={handleInputChange}
+          />
         </div>
         <div className="form-row">
           <SimpleInput
