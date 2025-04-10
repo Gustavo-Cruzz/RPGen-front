@@ -14,6 +14,20 @@ const RightColumn = ({
 }) => {
   return (
     <div className="right-column">
+      <TextInput
+        input_id="traits"
+        label="Additional Traits & Talents"
+        placeholder="Personality traits, ideals, bonds, flaws, and special abilities..."
+        value={FormData.characterTraits}
+        onChange={handleInputChange}
+      />
+      <TextInput
+        input_id="equipment"
+        label="Equipment"
+        placeholder="Weapons, armor, and other possessions..."
+        value={FormData.characterEquipment}
+        onChange={handleInputChange}
+      />
       <GenerationSection
         character={character}
         isGeneratingText={isGeneratingText}
@@ -24,25 +38,11 @@ const RightColumn = ({
         generatedImageUrl={generatedImageUrl}
       />
       <TextInput
-        input_id="traits"
-        label="Additional Traits & Talents"
-        placeholder="Personality traits, ideals, bonds, flaws, and special abilities..."
-        value={FormData.characterTraits}
-        onChange={handleInputChange}
-      />
-      <TextInput
         input_id="history"
         label="Character History"
-        placeholder="Background story, significant life events, and motivations..."
+        placeholder="Will be automatically generated after clicking on the 'Generate Backstory' button. Feel free to change or add any details."
         rows="6"
-        value={FormData.characterHistory}
-        onChange={handleInputChange}
-      />
-      <TextInput
-        input_id="equipment"
-        label="Equipment"
-        placeholder="Weapons, armor, and other possessions..."
-        value={FormData.characterEquipment}
+        value={character.history}
         onChange={handleInputChange}
       />
     </div>
