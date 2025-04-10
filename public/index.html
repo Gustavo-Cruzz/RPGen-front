@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="./favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -11,73 +11,38 @@
     />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>RPGen</title>
-    <style>
-      /* Estilos para a animação da logo */
-      .intro-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #1a1a1a;
-        z-index: 1000;
-        opacity: 1;
-        transition: opacity 1s ease-out;
-      }
-      
-      .intro-logo {
-        max-width: 300px;
-        width: 80%;
-        height: auto;
-        animation: fadeIn 1.5s ease-out;
-      }
-      
-      @keyframes fadeIn {
-        from { opacity: 0; transform: scale(0.8); }
-        to { opacity: 1; transform: scale(1); }
-      }
-      
-      /* Efeito de saída */
-      .intro-container.fade-out {
-        opacity: 0;
-      }
-      
-      /* Esconde o conteúdo principal inicialmente */
-      .main-content {
-        display: none;
-      }
-    </style>
+    <link rel="stylesheet" href="../src/index.css" />
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    
+
     <!-- Container para a animação da logo -->
     <div id="intro-animation" class="intro-container">
-      <img src="./assets/images/rpgenlogo.png" alt="RPGen Logo" class="intro-logo" />
+      <img
+        src="./assets/images/rpgenlogo.png"
+        alt="RPGen Logo"
+        class="intro-logo"
+      />
     </div>
-    
+
     <!-- Container principal do React -->
     <div id="root" class="main-content"></div>
 
     <script>
       // Script para exibir a logo e depois mostrar o conteúdo principal
-      document.addEventListener("DOMContentLoaded", function() {
+      document.addEventListener("DOMContentLoaded", function () {
         const introContainer = document.getElementById("intro-animation");
         const rootElement = document.getElementById("root");
-        
+
         // Tempo que a logo ficará visível (3 segundos)
         setTimeout(() => {
-          introContainer.classList.add('fade-out');
-          
+          introContainer.classList.add("fade-out");
+
           // Mostra o conteúdo principal após a animação de fade-out
           setTimeout(() => {
             introContainer.style.display = "none";
             rootElement.classList.remove("main-content");
           }, 1000); // Tempo da animação de fade-out
-          
         }, 3000); // Tempo de exibição da logo
       });
     </script>
