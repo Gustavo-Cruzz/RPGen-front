@@ -140,15 +140,17 @@ export const useCharacter = () => {
   };
   
   const generateImage = async () => {
+    // Basic check
     if (!character || !character.name || !character.class || !character.race) {
       setGenerationError("Please ensure basic character details (Name, Class, Race) are filled out.");
-      return;
+      return; // Exit function early
     }
 
     setIsGeneratingImage(true);
-    setGeneratedImageUrl('');
-    setGenerationError('');
+    setGeneratedImageUrl(''); // Clear previous image
+    setGenerationError('');   // Clear previous error
 
+    // Construct prompt safely
     const prompt = `Make an image for a D&D character using this information as base:
     Name: ${character.name || 'N/A'}
     Class: ${character.class || 'N/A'}
@@ -169,7 +171,7 @@ export const useCharacter = () => {
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/api/gerar-imagem`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/gerar-imagem`, // Ensure variable is set
         {
           method: "POST",
           headers: {
@@ -182,59 +184,34 @@ export const useCharacter = () => {
       if (response.ok) {
         const data = await response.json();
         if (data.imagem_base64) {
+          // Set the state variable, don't return JSX here
           setGeneratedImageUrl(`data:image/png;base64,${data.imagem_base64}`);
         } else {
-          throw new Error("Image data not found in response.");
+          // Handle case where backend responded OK but didn't send image data
+           throw new Error("Image data not found in response.");
         }
       } else {
+        // Try to get more specific error from backend
         let errorMsg = `Failed to generate image: ${response.status} ${response.statusText}`;
-        try {
-          const errorData = await response.json();
-          errorMsg = `Error: ${errorData.error || errorMsg}`;
-        } catch(e) {
-          // Ignore if error response is not JSON
-        }
-        throw new Error(errorMsg);
+         try {
+            const errorData = await response.json();
+            // Use error key from backend if available
+            errorMsg = `Error: ${errorData.error || errorMsg}`;
+         } catch(e) {
+            // Ignore if error response is not JSON
+         }
+        throw new Error(errorMsg); // Throw to be caught below
       }
     } catch (error) {
       console.error("Error generating image:", error);
+      // Set the error state for UI feedback
       setGenerationError(error.message || "An unexpected error occurred during image generation.");
-      setGeneratedImageUrl("");
+      setGeneratedImageUrl(""); // Ensure image URL is cleared on error
     } finally {
-      setIsGeneratingImage(false);
+      setIsGeneratingImage(false); // Stop loading indicator regardless of outcome
     }
+
   };
-
-  return (
-    <div className="image-generation-section">
-      <button onClick={generateImage} disabled={isGeneratingImage || !character}>
-        {isGeneratingImage ? 'Generating Image...' : 'Generate Character Image'}
-      </button>
-
-      {isGeneratingImage && <p>Generating image, please wait...</p>}
-
-      {generationError && <p style={{ color: 'red' }}>{generationError}</p>}
-
-      {generatedImageUrl && !isGeneratingImage && (
-        <div style={{ marginTop: '15px' }}>
-          <h3>Generated Image:</h3>
-          <img
-            src={generatedImageUrl}
-            alt={`Generated image for ${character?.name || 'character'}`}
-            style={{
-              maxWidth: '100%',
-              maxHeight: '500px',
-              height: 'auto',
-              border: '1px solid #ccc',
-              marginTop: '10px'
-            }}
-          />
-        </div>
-      )}
-    </div>
-  );
-}
-
 
   const resetCharacter = () => {
     setCharacter(initialCharacterState);
