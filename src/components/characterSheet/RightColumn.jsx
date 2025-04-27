@@ -8,7 +8,7 @@ const RightColumn = ({
   isGeneratingText,
   isGeneratingImage,
   generateTextWithLLM,
-  generateImageWithHuggingFace,
+  generateImage,
   generatedText,
   generatedImageUrl,
 }) => {
@@ -33,7 +33,7 @@ const RightColumn = ({
         isGeneratingText={isGeneratingText}
         isGeneratingImage={isGeneratingImage}
         generateTextWithLLM={generateTextWithLLM}
-        generateImageWithHuggingFace={generateImageWithHuggingFace}
+        generateImage={generateImage}
         generatedText={generatedText}
         generatedImageUrl={generatedImageUrl}
       />

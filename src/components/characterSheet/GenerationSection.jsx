@@ -7,7 +7,7 @@ const GenerationSection = ({
   isGeneratingText,
   isGeneratingImage,
   generateTextWithLLM,
-  generateImageWithHuggingFace,
+  generateImage,
   generatedImageUrl,
 }) => {
   return (
@@ -23,7 +23,7 @@ const GenerationSection = ({
         />
         
         <GenerationButton
-          onClick={generateImageWithHuggingFace}
+          onClick={generateImage}
           disabled={isGeneratingImage}
           loadingText="Generating Image..."
           defaultText="Image Gen - Work In Progress"

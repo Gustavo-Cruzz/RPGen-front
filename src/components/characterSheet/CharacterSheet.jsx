@@ -8,7 +8,7 @@ const CharacterSheet = ({
   isGeneratingText,
   isGeneratingImage,
   generateTextWithLLM,
-  generateImageWithHuggingFace,
+  generateImage,
   generatedText,
   generatedImageUrl
 }) => {
@@ -21,7 +21,7 @@ const CharacterSheet = ({
         isGeneratingText={isGeneratingText}
         isGeneratingImage={isGeneratingImage}
         generateTextWithLLM={generateTextWithLLM}
-        generateImageWithHuggingFace={generateImageWithHuggingFace}
+        generateImage={generateImage}
         generatedText={generatedText}
         generatedImageUrl={generatedImageUrl}
       />

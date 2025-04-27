@@ -15,7 +15,7 @@ function App() {
     generatedText,
     generatedImageUrl,
     generateTextWithLLM,
-    generateImageWithHuggingFace
+    generateImage
   } = useCharacter();
 
   return (
@@ -27,7 +27,7 @@ function App() {
         isGeneratingText={isGeneratingText}
         isGeneratingImage={isGeneratingImage}
         generateTextWithLLM={generateTextWithLLM}
-        generateImageWithHuggingFace={generateImageWithHuggingFace}
+        generateImage={generateImage}
         generatedText={generatedText}
         generatedImageUrl={generatedImageUrl}
       />

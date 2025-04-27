@@ -138,70 +138,103 @@ export const useCharacter = () => {
       setIsGeneratingText(false);
     }
   };
-
+  
   const generateImage = async () => {
+    if (!character || !character.name || !character.class || !character.race) {
+      setGenerationError("Please ensure basic character details (Name, Class, Race) are filled out.");
+      return;
+    }
+
     setIsGeneratingImage(true);
+    setGeneratedImageUrl('');
+    setGenerationError('');
+
+    const prompt = `Make an image for a D&D character using this information as base:
+    Name: ${character.name || 'N/A'}
+    Class: ${character.class || 'N/A'}
+    Race: ${character.race || 'N/A'}
+    Gender: ${character.gender || 'N/A'}
+    Age: ${character.age || 'N/A'}
+    Height: ${character.height || 'N/A'}
+    Weight: ${character.weight || 'N/A'}
+    Eye Color: ${character.eyeColor || 'N/A'}
+    Skin Color: ${character.skinColor || 'N/A'}
+    Hair Color: ${character.hairColor || 'N/A'}
+    Description: ${character.description || 'N/A'}
+    Allies: ${character.allies || 'N/A'}
+    Notes: ${character.notes || 'N/A'}
+    Traits: ${character.traits || 'N/A'}
+    Equipment: ${character.equipment || 'N/A'}
+    History: ${character.history || 'N/A'}`;
+
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}api/gerar-imagem`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/gerar-imagem`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            prompt:
-              "Make an image for a D&D character using this information as base:" +
-              "\nName:" +
-              character.name +
-              "\nClass:" +
-              character.class +
-              "\nRace:" +
-              character.race +
-              "\nGender:" +
-              character.gender +
-              "\nAge:" +
-              character.age +
-              "\nHeight:" +
-              character.height +
-              "\nWeight:" +
-              character.weight +
-              "\neyeColor:" +
-              character.eyeColor +
-              "\nskinColor:" +
-              character.skinColor +
-              "\nhairColor:" +
-              character.hairColor +
-              "\ndescription:" +
-              character.description +
-              "\nallies:" +
-              character.allies +
-              "\nnotes:" +
-              character.notes +
-              "\ntraits:" +
-              character.traits +
-              "\nequipment:" +
-              character.equipment +
-              "\nHistory:" +
-              character.history,
-          }),
+          body: JSON.stringify({ prompt }),
         }
       );
 
       if (response.ok) {
         const data = await response.json();
-        setGeneratedImageUrl(`data:image/png;base64,${data.imagem_base64}`);
+        if (data.imagem_base64) {
+          setGeneratedImageUrl(`data:image/png;base64,${data.imagem_base64}`);
+        } else {
+          throw new Error("Image data not found in response.");
+        }
       } else {
-        console.error("Failed to generate image:", response.statusText);
-        setGeneratedImageUrl("");
+        let errorMsg = `Failed to generate image: ${response.status} ${response.statusText}`;
+        try {
+          const errorData = await response.json();
+          errorMsg = `Error: ${errorData.error || errorMsg}`;
+        } catch(e) {
+          // Ignore if error response is not JSON
+        }
+        throw new Error(errorMsg);
       }
     } catch (error) {
       console.error("Error generating image:", error);
+      setGenerationError(error.message || "An unexpected error occurred during image generation.");
       setGeneratedImageUrl("");
     } finally {
       setIsGeneratingImage(false);
     }
   };
+
+  return (
+    <div className="image-generation-section">
+      <button onClick={generateImage} disabled={isGeneratingImage || !character}>
+        {isGeneratingImage ? 'Generating Image...' : 'Generate Character Image'}
+      </button>
+
+      {isGeneratingImage && <p>Generating image, please wait...</p>}
+
+      {generationError && <p style={{ color: 'red' }}>{generationError}</p>}
+
+      {generatedImageUrl && !isGeneratingImage && (
+        <div style={{ marginTop: '15px' }}>
+          <h3>Generated Image:</h3>
+          <img
+            src={generatedImageUrl}
+            alt={`Generated image for ${character?.name || 'character'}`}
+            style={{
+              maxWidth: '100%',
+              maxHeight: '500px',
+              height: 'auto',
+              border: '1px solid #ccc',
+              marginTop: '10px'
+            }}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
+
 
   const resetCharacter = () => {
     setCharacter(initialCharacterState);
