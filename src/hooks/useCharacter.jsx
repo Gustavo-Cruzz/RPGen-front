@@ -39,16 +39,14 @@ export const useCharacter = () => {
 
   const handleInputChange = (e) => {
     var { name, value } = e.target;
-    if (name === "height") {
-      value = value + "cm";
-    }
-    if (name === "weight") {
-      value = value + "kg";
-    }
-    if (name === "age") {
-      value = value + " years old";
-    }
+  // Para campos numéricos, removemos qualquer unidade antes de atualizar
+  if (name === "height" || name === "weight" || name === "age") {
+    // Remove unidades e caracteres não numéricos, mantendo apenas números
+    const numericValue = value.replace(/[^0-9]/g, '');
+    characterUpdate(name, numericValue);
+  } else {
     characterUpdate(name, value);
+  }
   };
 
   const saveCharacter = () => {
@@ -212,7 +210,41 @@ export const useCharacter = () => {
   useEffect(() => {
     loadCharacter();
   }, []);
+  const exportCharacter = () => {
+  const dataStr = JSON.stringify(character, null, 2);
+  const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+  
+  const exportFileDefaultName = `${character.name || 'character'}.json`;
+  
+  const linkElement = document.createElement('a');
+  linkElement.setAttribute('href', dataUri);
+  linkElement.setAttribute('download', exportFileDefaultName);
+  linkElement.click();
+};
 
+const importCharacter = (file) => {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    
+    fileReader.onload = (event) => {
+      try {
+        const parsedData = JSON.parse(event.target.result);
+        console.log("Dados importados:", parsedData);
+        setCharacter(parsedData);
+        resolve(parsedData);
+      } catch (error) {
+        console.error("Erro ao importar:", error);
+        reject(error);
+      }
+    };
+    
+    fileReader.onerror = (error) => {
+      console.error("Erro no FileReader:", error);
+      reject(error);
+    };
+    fileReader.readAsText(file);
+  });
+};
   return {
     character,
     handleInputChange,
@@ -224,5 +256,9 @@ export const useCharacter = () => {
     generateTextWithLLM,
     generateImage,
     resetCharacter,
+    exportCharacter, 
+    importCharacter, 
   };
+  
 };
+

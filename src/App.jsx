@@ -15,12 +15,18 @@ function App() {
     generatedText,
     generatedImageUrl,
     generateTextWithLLM,
-    generateImageWithHuggingFace
+    generateImageWithHuggingFace,
+    exportCharacter, 
+    importCharacter
   } = useCharacter();
 
   return (
     <div className="app">
-      <Header saveCharacter={saveCharacter} />
+     <Header 
+        saveCharacter={saveCharacter} 
+        exportCharacter={exportCharacter}
+        importCharacter={importCharacter}
+      />
       <CharacterSheet
         character={character}
         handleInputChange={handleInputChange}

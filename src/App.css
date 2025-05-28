@@ -251,3 +251,25 @@ textarea {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.import-export-btn {
+  background-color: var(--dnd-gold);
+  color: var(--dnd-red);
+  border: 1px solid var(--dnd-border);
+  padding: 10px 15px;
+  border-radius: 0;
+  cursor: pointer;
+  font-family: "Modesto Condensed", serif;
+  font-weight: 700;
+}
+
+.import-export-btn:hover {
+  background-color: #D9C48E;
+  color: var(--dnd-red);
+}
