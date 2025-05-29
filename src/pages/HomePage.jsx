@@ -7,7 +7,7 @@ const HomePage = () => {
     <div className="home-container">
       <div className="app-header">
         <h1>RPGen</h1>
-        <p>An online DnD character creator, powered by Artificial Intelligence for a real experience!</p>
+        <p>An online RPG character creator, powered by Artificial Intelligence</p>
       </div>
       
       <div className="auth-options">
