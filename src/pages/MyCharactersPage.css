@@ -1,0 +1,86 @@
+:root {
+  --dnd-red: #58180D;
+  --dnd-gold: #C9AD6A;
+  --dnd-parchment: #F2E5BC;
+  --dnd-metallic: #E0E0E0;
+  --dnd-light: #E8D8C3;
+  --dnd-border: #3C2F1E;
+}
+
+
+.my-characters-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.nav-link {
+  background-color: var(--dnd-red);
+  color: var(--dnd-parchment);
+  border: none;
+  padding: 12px 24px;
+  font-family: "Modesto Condensed", serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 1rem;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+.logout-button {
+  background-color: var(--dnd-red);
+  color: var(--dnd-parchment);
+  border: none;
+  padding: 12px 24px;
+  font-family: "Modesto Condensed", serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 1rem;
+}
+
+.characters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.character-card, .new-character-card {
+  background-color: var(--dnd-parchment);
+  border: 2px solid var(--dnd-gold);
+  padding: 1.5rem;
+  text-align: center;
+  text-decoration: none;
+  color: var(--dnd-red);
+  font-family: "Modesto Condensed", serif;
+  font-size: 1.2rem;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.character-card:hover, .new-character-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.new-character-card {
+  background-color: rgba(201, 173, 106, 0.2);
+  border: 2px dashed var(--dnd-gold);
+}

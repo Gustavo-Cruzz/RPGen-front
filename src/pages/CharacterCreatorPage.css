@@ -273,3 +273,92 @@ textarea {
   background-color: #D9C48E;
   color: var(--dnd-red);
 }
+.creator-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: var(--dnd-light);
+  background-image: url('https://www.dndbeyond.com/content/1-0-1589-0/skins/waterdeep/images/background-texture.png');
+  background-attachment: fixed;
+}
+
+.character-form {
+  background-color: rgba(242, 229, 188, 0.9);
+  padding: 2rem;
+  border: 3px ridge var(--dnd-gold);
+  box-shadow: 0 0 20px rgba(87, 60, 30, 0.4);
+  margin-top: 1rem;
+}
+
+.form-section {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--dnd-gold);
+}
+
+.form-section h2 {
+  color: var(--dnd-red);
+  font-family: "Modesto Condensed", serif;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--dnd-gold);
+  padding-bottom: 0.5rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.generation-section {
+  background-color: rgba(201, 173, 106, 0.1);
+  padding: 1rem;
+  border: 2px dashed var(--dnd-gold);
+}
+
+.generated-image {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.generated-image img {
+  max-width: 100%;
+  border: 2px solid var(--dnd-border);
+  margin-top: 0.5rem;
+}
+
+.save-button {
+  background-color: var(--dnd-red);
+  color: var(--dnd-parchment);
+  border: none;
+  padding: 12px 24px;
+  font-family: "Modesto Condensed", serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.save-button:hover {
+  background-color: #6D2013;
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .character-form {
+    padding: 1rem;
+  }
+}

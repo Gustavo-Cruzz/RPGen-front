@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import api from "../services/api"
 const initialCharacterState = {
   name: "",
   class: "",
@@ -47,16 +47,6 @@ export const useCharacter = () => {
   } else {
     characterUpdate(name, value);
   }
-  };
-
-  const saveCharacter = () => {
-    console.log("Saving character:", character); // Debug log
-    localStorage.setItem("dndCharacter", JSON.stringify(character));
-    console.log(
-      "LocalStorage updated:",
-      JSON.parse(localStorage.getItem("dndCharacter"))
-    ); // Verify write
-    alert("Character saved locally!");
   };
 
   const loadCharacter = () => {
@@ -244,6 +234,15 @@ const importCharacter = (file) => {
     };
     fileReader.readAsText(file);
   });
+};
+const saveCharacter = async () => {
+  try {
+    const response = await api.post('/characters', character);
+    return response.data;
+  } catch (error) {
+    console.error('Error saving character:', error);
+    throw error;
+  }
 };
   return {
     character,

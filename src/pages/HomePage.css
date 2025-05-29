@@ -1,0 +1,150 @@
+:root {
+  --dnd-red: #58180D;
+  --dnd-gold: #C9AD6A;
+  --dnd-parchment: #F2E5BC;
+  --dnd-metallic: #E0E0E0;
+  --dnd-light: #E8D8C3;
+  --dnd-border: #3C2F1E;
+}
+
+
+.home-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+  background-color: var(--dnd-light);
+  background-image: url('https://www.dndbeyond.com/content/1-0-1589-0/skins/waterdeep/images/background-texture.png');
+  background-attachment: fixed;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background-color: rgba(242, 229, 188, 0.8);
+  border: 3px ridge var(--dnd-gold);
+  box-shadow: 0 0 20px rgba(87, 60, 30, 0.4);
+}
+
+.app-header h1 {
+  color: var(--dnd-red);
+  font-family: "Modesto Condensed", "Palatino Linotype", serif;
+  font-size: 3.5rem;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.app-header p {
+  color: var(--dnd-red);
+  font-family: "Bookmania", "Palatino Linotype", serif;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.auth-options {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.auth-box {
+  flex: 1;
+  min-width: 300px;
+  max-width: 450px;
+  padding: 2rem;
+  background-color: rgba(242, 229, 188, 0.9);
+  border: 2px solid var(--dnd-border);
+  box-shadow: 0 0 15px rgba(87, 60, 30, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.auth-box:hover {
+  transform: translateY(-5px);
+}
+
+.auth-box h3 {
+  color: var(--dnd-red);
+  font-family: "Modesto Condensed", serif;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--dnd-gold);
+  padding-bottom: 0.5rem;
+}
+
+.auth-box p {
+  color: var(--dnd-red);
+  font-family: "Bookmania", serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.auth-button {
+  display: inline-block;
+  background-color: var(--dnd-red);
+  color: var(--dnd-parchment);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 0;
+  cursor: pointer;
+  font-weight: 700;
+  font-family: "Modesto Condensed", serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.auth-button:hover {
+  background-color: #6D2013;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .app-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .app-header p {
+    font-size: 1rem;
+  }
+  
+  .auth-options {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .auth-box {
+    min-width: 100%;
+  }
+}
+
+/* Efeito de pergaminho para as caixas */
+.auth-box {
+  background-image: 
+    linear-gradient(to bottom right,
+      rgba(243, 236, 217, 0.95),
+      rgba(235, 221, 187, 0.9)),
+    url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+  background-blend-mode: multiply;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 4px double #b08d57;
+  opacity: 0.4;
+  pointer-events: none;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.15);
+  mix-blend-mode: multiply;
+}

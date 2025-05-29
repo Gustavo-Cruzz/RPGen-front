@@ -1,44 +1,34 @@
 import React from "react";
-import "./App.css";
-import Header from "./components/Header";
-import CharacterSheet from "./components/characterSheet/CharacterSheet";
-import Footer from "./components/Footer";
-import { useCharacter } from "./hooks/useCharacter";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import MyCharactersPage from "./pages/MyCharactersPage";
+import CharacterCreatorPage from "./pages/CharacterCreatorPage";
+import {AuthProvider} from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
-  const {
-    character,
-    handleInputChange,
-    saveCharacter,
-    isGeneratingText,
-    isGeneratingImage,
-    generatedText,
-    generatedImageUrl,
-    generateTextWithLLM,
-    generateImageWithHuggingFace,
-    exportCharacter, 
-    importCharacter
-  } = useCharacter();
-
   return (
-    <div className="app">
-     <Header 
-        saveCharacter={saveCharacter} 
-        exportCharacter={exportCharacter}
-        importCharacter={importCharacter}
-      />
-      <CharacterSheet
-        character={character}
-        handleInputChange={handleInputChange}
-        isGeneratingText={isGeneratingText}
-        isGeneratingImage={isGeneratingImage}
-        generateTextWithLLM={generateTextWithLLM}
-        generateImageWithHuggingFace={generateImageWithHuggingFace}
-        generatedText={generatedText}
-        generatedImageUrl={generatedImageUrl}
-      />
-      <Footer />
-    </div>
+    <Router>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/my-characters" element={
+            <ProtectedRoute>
+              <MyCharactersPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/create-character" element={
+            <ProtectedRoute>
+              <CharacterCreatorPage />
+            </ProtectedRoute>
+          } />
+        </Routes>
+      </AuthProvider>
+    </Router>
   );
 }
 
