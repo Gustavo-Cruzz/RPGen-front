@@ -18,14 +18,14 @@ const RightColumn = ({
         input_id="traits"
         label="Additional Traits & Talents"
         placeholder="Personality traits, ideals, bonds, flaws, and special abilities..."
-        value={character.traits}
+        value={FormData.characterTraits}
         onChange={handleInputChange}
       />
       <TextInput
         input_id="equipment"
         label="Equipment"
         placeholder="Weapons, armor, and other possessions..."
-        value={character.equipment}
+        value={FormData.characterEquipment}
         onChange={handleInputChange}
       />
       <GenerationSection

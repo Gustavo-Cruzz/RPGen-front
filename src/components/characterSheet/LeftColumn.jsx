@@ -2,7 +2,7 @@ import React from "react";
 import SimpleInput from "../inputArea/SimpleInput";
 import TextInput from "../inputArea/TextInput";
 
-const LeftColumn = ({character, handleInputChange }) => {
+const LeftColumn = ({ handleInputChange }) => {
   return (
     <div className="left-column">
       <div className="basic-info">
@@ -11,7 +11,7 @@ const LeftColumn = ({character, handleInputChange }) => {
           input_id="name"
           label="Character Name"
           placeholder="Enter character name"
-          value={character.name}
+          value={FormData.characterName}
           onChange={handleInputChange}
         />
         <div className="form-row">
@@ -19,21 +19,21 @@ const LeftColumn = ({character, handleInputChange }) => {
             input_id="class"
             label="Class"
             placeholder="e.g. Fighter"
-            value={character.class}
+            value={FormData.characterClass}
             onChange={handleInputChange}
           />
           <SimpleInput
             input_id="race"
             label="Race"
             placeholder="e.g. Elf"
-            value={character.race}
+            value={FormData.characterRace}
             onChange={handleInputChange}
           />
           <SimpleInput
             input_id="gender"
             label="Gender"
             placeholder="e.g. Female"
-            value={character.gender}
+            value={FormData.characterGender}
             onChange={handleInputChange}
           />
         </div>
@@ -43,7 +43,7 @@ const LeftColumn = ({character, handleInputChange }) => {
             input_id="age"
             label="Age"
             placeholder="e.g. 25"
-            value={character.age}
+            value={FormData.characterAge}
             onChange={handleInputChange}
           />
           <SimpleInput
@@ -51,7 +51,7 @@ const LeftColumn = ({character, handleInputChange }) => {
             input_id="height"
             label="Height (cm)"
             placeholder="e.g. 160"
-            value={character.height}
+            value={FormData.characterHeight}
             onChange={handleInputChange}
           />
           <SimpleInput
@@ -59,7 +59,7 @@ const LeftColumn = ({character, handleInputChange }) => {
             input_id="weight"
             label="Weight (Kg)"
             placeholder="e.g. 80"
-            value={character.weight}
+            value={FormData.characterWeight}
             onChange={handleInputChange}
           />
         </div>
@@ -69,7 +69,7 @@ const LeftColumn = ({character, handleInputChange }) => {
             input_id="eyeColor"
             label="Eye Color"
             placeholder="e.g. Blue"
-            value={character.eyeColor}
+            value={FormData.characterEyeColor}
             onChange={handleInputChange}
           />
           <SimpleInput
@@ -77,7 +77,7 @@ const LeftColumn = ({character, handleInputChange }) => {
             input_id="skinColor"
             label="Skin Color"
             placeholder="e.g. Tan"
-            value={character.skinColor}
+            value={FormData.characterSkinColor}
             onChange={handleInputChange}
           />
           <SimpleInput
@@ -85,7 +85,7 @@ const LeftColumn = ({character, handleInputChange }) => {
             input_id="hairColor"
             label="Hair Color"
             placeholder="e.g. Black"
-            value={character.hairColor}
+            value={FormData.characterHairColor}
             onChange={handleInputChange}
           />
         </div>
@@ -94,21 +94,21 @@ const LeftColumn = ({character, handleInputChange }) => {
         input_id="description"
         label="Description"
         placeholder="Physical description and distinguishing features..."
-        value={character.description}
+        value={FormData.characterDescription}
         onChange={handleInputChange}
       />
       <TextInput
         input_id="allies"
         label="Allies & Organizations"
         placeholder="Notable allies, organizations, or affiliations..."
-        value={character.allies}
+        value={FormData.characterAllies}
         onChange={handleInputChange}
       />
       <TextInput
         input_id="notes"
         label="Notes"
         placeholder="Additional notes about the character..."
-        value={character.notes}
+        value={FormData.characterNotes}
         onChange={handleInputChange}
       />
     </div>
