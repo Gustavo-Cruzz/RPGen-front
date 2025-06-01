@@ -4,10 +4,10 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import MyCharactersPage from "./pages/MyCharactersPage";
-import CharacterCreatorPage from "./pages/CharacterCreatorPage";
+import CharacterCreatorPage from "./pages/CharacterCreatorPage/CharacterCreatorPage";
 import { AuthProvider } from "./context/AuthContext";
 import { CharactersProvider } from "./context/CharactersContext";
-import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 function App() {
   return (

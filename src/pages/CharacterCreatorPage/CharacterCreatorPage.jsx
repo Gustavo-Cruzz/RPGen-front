@@ -1,10 +1,10 @@
 import { useContext, useEffect, useRef } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
-import { CharactersContext } from "../context/CharactersContext"; // Importa o contexto
-import CharacterSheet from "../components/characterSheet/CharacterSheet";
-import { useCharacter } from "../hooks/useCharacter";
-import ImportExportButtons from "../components/ImportExportButtons";
+import { AuthContext } from "../../context/AuthContext";
+import { CharactersContext } from "../../context/CharactersContext"; // Importa o contexto
+import CharacterSheet from "./components/characterSheet/CharacterSheet";
+import { useCharacter } from "../../hooks/useCharacter";
+import ImportExportButtons from "./components/ImportExportButtons";
 import "./CharacterCreatorPage.css";
 
 const CharacterCreatorPage = () => {
