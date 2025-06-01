@@ -4,28 +4,43 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import MyCharactersPage from "./pages/MyCharactersPage";
-import CharacterCreatorPage from "./pages/CharacterCreatorPage";
-import {AuthProvider} from "./context/AuthContext";
-import ProtectedRoute from "./components/ProtectedRoute";
+import CharacterCreatorPage from "./pages/CharacterCreatorPage/CharacterCreatorPage";
+import { AuthProvider } from "./context/AuthContext";
+import { CharactersProvider } from "./context/CharactersContext";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 function App() {
   return (
     <Router>
       <AuthProvider>
         <Routes>
+          {/* Rotas públicas */}
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/my-characters" element={
-            <ProtectedRoute>
-              <MyCharactersPage />
-            </ProtectedRoute>
-          } />
-          <Route path="/create-character" element={
-            <ProtectedRoute>
-              <CharacterCreatorPage />
-            </ProtectedRoute>
-          } />
+
+          {/* Rotas protegidas (usuário autenticado + personagens disponíveis) */}
+          <Route
+            path="/my-characters"
+            element={
+              <ProtectedRoute>
+                <CharactersProvider>
+                  <MyCharactersPage />
+                </CharactersProvider>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/character/:id"
+            element={
+              <ProtectedRoute>
+                <CharactersProvider>
+                  <CharacterCreatorPage />
+                </CharactersProvider>
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </AuthProvider>
     </Router>

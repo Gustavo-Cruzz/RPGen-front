@@ -1,55 +1,62 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import api from '../services/api';
-import { AuthContext } from '../context/AuthContext';
-import './MyCharactersPage.css';
+import React, { useContext, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import { CharactersContext } from "../context/CharactersContext";
+import { AuthContext } from "../context/AuthContext";
+import "./MyCharactersPage.css";
 
 const MyCharactersPage = () => {
-  const [characters, setCharacters] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const { user, logout } = useContext(AuthContext);
+  // Acesso ao estado global de personagens
+  const { characters, loading, fetchCharacters } =
+    useContext(CharactersContext);
 
+  const hasFetched = useRef(false);
+  // Ao montar o componente, busca os personagens do usuário autenticado
   useEffect(() => {
-    const fetchCharacters = async () => {
-      try {
-        const response = await api.get('/characters');
-        setCharacters(response.data);
-      } catch (error) {
-        console.error('Error fetching characters:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchCharacters();
-  }, []);
+    if (!hasFetched.current) {
+      fetchCharacters();
+      hasFetched.current = true;
+    }
+  }, [fetchCharacters]);
 
+  // Acesso à função de logout do contexto de autenticação
+  const { logout } = useContext(AuthContext);
+
+  // Enquanto os personagens estão sendo carregados, exibe feedback visual
   if (loading) {
-    return <div>Loading characters...</div>;
+    return <div>Carregando personagens...</div>;
   }
 
   return (
     <div className="my-characters-container">
+      {/* Barra de navegação superior */}
       <div className="header-nav">
-        <Link to="/" className="nav-link">Homepage</Link>
-        <button onClick={logout} className="logout-button">Logout</button>
+        <Link to="/" className="nav-link">
+          Homepage
+        </Link>
+        <button onClick={logout} className="logout-button">
+          Logout
+        </button>
       </div>
-      
-      <h1>My characters</h1>
-      
+
+      <h1>Meus personagens</h1>
+
+      {/* Grade com os personagens */}
       <div className="characters-grid">
+        {/* Card para criar novo personagem */}
+        <Link to="/character/new" className="new-character-card">
+          + Criar novo personagem
+        </Link>
+
+        {/* Lista dos personagens existentes */}
         {characters.map((character) => (
-          <Link 
-            key={character._id} 
+          <Link
+            key={character._id}
             to={`/character/${character._id}`}
             className="character-card"
           >
             {character.name}
           </Link>
         ))}
-        
-        <Link to="/create-character" className="new-character-card">
-          + Create New Character
-        </Link>
       </div>
     </div>
   );
