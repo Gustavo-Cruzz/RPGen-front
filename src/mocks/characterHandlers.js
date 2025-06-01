@@ -122,7 +122,7 @@ export const characterHandlers = [
     });
   }),
 
-  http.post(`${backendUrl}/api/gerar-texto`, async ({ request }) => {
+  http.post(`${backendUrl}/gerar-texto`, async ({ request }) => {
     const { prompt } = await request.json();
 
     // Extração simples do nome do personagem a partir do prompt
