@@ -86,11 +86,9 @@ export const useCharacter = () => {
     return changedFields;
   };
 
-  // O restante das funções continuam iguais...
-
   const generateTextWithLLM = async () => {
     setIsGeneratingText(true);
-    const backend_url = `${process.env.REACT_APP_BACKEND_URL}api/gerar-texto`;
+    const backend_url = `${process.env.REACT_APP_BACKEND_URL}/api/gerar-texto`;
 
     try {
       const response = await fetch(backend_url, {
@@ -139,7 +137,7 @@ export const useCharacter = () => {
     setIsGeneratingImage(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}api/gerar-imagem`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/gerar-imagem`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

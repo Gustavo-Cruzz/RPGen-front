@@ -121,4 +121,19 @@ export const characterHandlers = [
       message: `Character ${id} deleted successfully.`,
     });
   }),
+
+  http.post(`${backendUrl}/api/gerar-texto`, async ({ request }) => {
+    const { prompt } = await request.json();
+
+    // Extração simples do nome do personagem a partir do prompt
+    const nameMatch = prompt.match(/Name:(.+?)\n/);
+    const name = nameMatch ? nameMatch[1].trim() : "Personagem Desconhecido";
+
+    // Texto gerado fictício com base no nome
+    const fakeBackstory = `[História dramática sobre ${name}]`;
+
+    return HttpResponse.json({
+      "Generated Text": fakeBackstory,
+    });
+  }),
 ];
