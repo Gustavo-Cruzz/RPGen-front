@@ -4,7 +4,7 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
 
 export const userHandlers = [
   // Endpoint de registro
-  http.post(`${backendUrl}/auth/register`, async ({ request }) => {
+  http.post(`${backendUrl}/api/auth/register`, async ({ request }) => {
     const body = await request.json();
 
     return HttpResponse.json({
@@ -18,7 +18,7 @@ export const userHandlers = [
   }),
 
   // Endpoint de login
-  http.post(`${backendUrl}/auth/login`, async ({ request }) => {
+  http.post(`${backendUrl}/api/auth/login`, async ({ request }) => {
     const body = await request.json();
 
     if (body.email === 'mock@email.com' && body.password === '123') {
@@ -39,7 +39,7 @@ export const userHandlers = [
   }),
 
   // Endpoint para manter o usuário autenticado
-  http.get(`${backendUrl}/auth/me`, ({ request }) => {
+  http.get(`${backendUrl}/api/auth/me`, ({ request }) => {
     const authHeader = request.headers.get('Authorization');
     if (authHeader === 'Bearer mock-jwt-token') {
       return HttpResponse.json({
