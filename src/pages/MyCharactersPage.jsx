@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { CharactersContext } from '../context/CharactersContext';
-import { AuthContext } from '../context/AuthContext';
-import './MyCharactersPage.css';
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { CharactersContext } from "../context/CharactersContext";
+import { AuthContext } from "../context/AuthContext";
+import "./MyCharactersPage.css";
 
 const MyCharactersPage = () => {
   const { characters, loading } = useContext(CharactersContext);
@@ -15,13 +15,20 @@ const MyCharactersPage = () => {
   return (
     <div className="my-characters-container">
       <div className="header-nav">
-        <Link to="/" className="nav-link">Homepage</Link>
-        <button onClick={logout} className="logout-button">Logout</button>
+        <Link to="/" className="nav-link">
+          Homepage
+        </Link>
+        <button onClick={logout} className="logout-button">
+          Logout
+        </button>
       </div>
 
       <h1>Meus personagens</h1>
 
       <div className="characters-grid">
+        <Link to="/character/new" className="new-character-card">
+          + Criar novo personagem
+        </Link>
         {characters.map((character) => (
           <Link
             key={character._id}
@@ -31,10 +38,6 @@ const MyCharactersPage = () => {
             {character.name}
           </Link>
         ))}
-
-        <Link to="/create-character" className="new-character-card">
-          + Criar novo personagem
-        </Link>
       </div>
     </div>
   );

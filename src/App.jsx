@@ -30,7 +30,7 @@ function App() {
           />
 
           <Route
-            path="/create-character"
+            path="/character/:id"
             element={
               <ProtectedRoute>
                 <CharactersProvider>
@@ -38,6 +38,16 @@ function App() {
                 </CharactersProvider>
               </ProtectedRoute>
             }
+          />
+          <Route
+          path="/character/:id"
+          element={
+            <ProtectedRoute>
+              <CharactersProvider>
+                <CharacterCreatorPage/>
+              </CharactersProvider>
+            </ProtectedRoute>
+          }
           />
         </Routes>
       </AuthProvider>
