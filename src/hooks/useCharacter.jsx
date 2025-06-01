@@ -24,6 +24,7 @@ const initialCharacterState = {
 
 export const useCharacter = () => {
   const [character, setCharacter] = useState(initialCharacterState);
+  const [originalCharacter, setOriginalCharacter] = useState(initialCharacterState); // Guarda o personagem original
   const [isGeneratingText, setIsGeneratingText] = useState(false);
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
   const [generatedText, setGeneratedText] = useState("");
@@ -52,20 +53,40 @@ export const useCharacter = () => {
     }
   };
 
-  // MEMOIZAR loadCharacter para evitar loops infinitos no useEffect
+  // Memoiza e carrega personagem, além de salvar o original para comparação
   const loadCharacter = useCallback(async (id) => {
     try {
       if (id === "new") {
         setCharacter(initialCharacterState);
+        setOriginalCharacter(initialCharacterState);
         return;
       }
       const data = await getCharacterById(id);
       console.log("Personagem carregado via API:", data);
       setCharacter(data);
+      setOriginalCharacter(data); // Salva estado original para futuras comparações
     } catch (error) {
       console.error("Erro ao carregar personagem via API:", error);
     }
   }, [getCharacterById]);
+
+  /**
+   * Compara o personagem atual com o original e retorna
+   * um array com os nomes dos campos que foram alterados.
+   */
+  const getCharacterChanges = () => {
+    const changedFields = [];
+
+    Object.keys(character).forEach((key) => {
+      if (character[key] !== originalCharacter[key]) {
+        changedFields.push(key);
+      }
+    });
+
+    return changedFields;
+  };
+
+  // O restante das funções continuam iguais...
 
   const generateTextWithLLM = async () => {
     setIsGeneratingText(true);
@@ -162,6 +183,7 @@ export const useCharacter = () => {
 
   const resetCharacter = () => {
     setCharacter(initialCharacterState);
+    setOriginalCharacter(initialCharacterState);
     setGeneratedText("");
     setGeneratedImageUrl("");
   };
@@ -185,6 +207,7 @@ export const useCharacter = () => {
           const parsedData = JSON.parse(event.target.result);
           console.log("Dados importados:", parsedData);
           setCharacter(parsedData);
+          setOriginalCharacter(parsedData); // Atualiza original também
           resolve(parsedData);
         } catch (error) {
           console.error("Erro ao importar:", error);
@@ -225,5 +248,6 @@ export const useCharacter = () => {
     exportCharacter,
     importCharacter,
     loadCharacter,
+    getCharacterChanges,
   };
 };

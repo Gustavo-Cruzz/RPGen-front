@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect } from 'react';
-import api from '../services/api';
+import React, { createContext, useState, useEffect, useCallback } from "react";
+import api from "../services/api";
 
 export const CharactersContext = createContext();
 
@@ -7,38 +7,21 @@ export const CharactersProvider = ({ children }) => {
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  /**
-   * Busca todos os personagens do usuário autenticado.
-   *
-   * Esta função realiza uma requisição GET para a rota /characters
-   * e atualiza o estado local `characters` com a resposta da API.
-   *
-   * @returns {Promise<void>}
-   * @throws Registra no console qualquer erro ocorrido durante a requisição.
-   */
-  const fetchCharacters = async () => {
+  // Busca todos os personagens do usuário autenticado
+  const fetchCharacters = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await api.get('/characters');
+      const response = await api.get("/characters");
       setCharacters(response.data);
     } catch (error) {
-      console.error('Erro ao buscar personagens:', error);
+      console.error("Erro ao buscar personagens:", error);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  /**
-   * Busca um personagem específico pelo ID.
-   *
-   * Esta função realiza uma requisição GET para a rota /characters/:id
-   * e retorna os dados do personagem correspondente.
-   *
-   * @param {string} id - O ID do personagem a ser buscado.
-   * @returns {Promise<Object>} O personagem retornado pela API.
-   * @throws Lança erro se a requisição falhar.
-   */
-  const getCharacterById = async (id) => {
+  // Busca um personagem específico pelo ID
+  const getCharacterById = useCallback(async (id) => {
     try {
       const response = await api.get(`/characters/${id}`);
       return response.data;
@@ -46,20 +29,67 @@ export const CharactersProvider = ({ children }) => {
       console.error(`Erro ao buscar personagem com id ${id}:`, error);
       throw error;
     }
-  };
-
-  // Executa a busca de todos os personagens assim que o componente é montado
-  useEffect(() => {
-    fetchCharacters();
   }, []);
 
+  // Atualiza parcialmente um personagem pelo ID com os campos fornecidos
+  const patchCharacter = useCallback(async (id, changes) => {
+    try {
+      console.log(changes);
+      const response = await api.patch(`/characters/${id}`, changes);
+      // Atualiza o estado local dos personagens (opcional)
+      setCharacters((prev) =>
+        prev.map((char) => (char._id === id ? { ...char, ...changes } : char))
+      );
+      return response.data;
+    } catch (error) {
+      console.error(`Erro ao atualizar personagem com id ${id}:`, error);
+      throw error;
+    }
+  }, []);
+
+  // Substitui completamente um personagem pelo ID
+  const putCharacter = useCallback(async (id, newData) => {
+    try {
+      const response = await api.put(`/characters/${id}`, newData);
+      setCharacters((prev) =>
+        prev.map((char) => (char._id === id ? response.data : char))
+      );
+      return response.data;
+    } catch (error) {
+      console.error(`Erro ao substituir personagem com id ${id}:`, error);
+      throw error;
+    }
+  }, []);
+
+  // Deleta um personagem pelo ID
+  const deleteCharacter = useCallback(async (id) => {
+    try {
+      await api.delete(`/characters/${id}`);
+      // Atualiza o estado local removendo o personagem deletado
+      setCharacters((prev) => prev.filter((char) => char._id !== id));
+    } catch (error) {
+      console.error(`Erro ao deletar personagem com id ${id}:`, error);
+      throw error;
+    }
+  }, []);
+
+  // Carrega os personagens na montagem inicial
+  useEffect(() => {
+    fetchCharacters();
+  }, [fetchCharacters]);
+
   return (
-    <CharactersContext.Provider value={{
-      characters,
-      loading,
-      fetchCharacters,
-      getCharacterById
-    }}>
+    <CharactersContext.Provider
+      value={{
+        characters,
+        loading,
+        fetchCharacters,
+        getCharacterById,
+        patchCharacter,
+        putCharacter,
+        deleteCharacter,
+      }}
+    >
       {children}
     </CharactersContext.Provider>
   );

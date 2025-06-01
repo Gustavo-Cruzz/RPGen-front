@@ -38,7 +38,7 @@ export const userHandlers = [
     );
   }),
 
-  // Endpoint para obter informações do usuário autenticado
+  // Endpoint para manter o usuário autenticado
   http.get(`${backendUrl}/auth/me`, ({ request }) => {
     const authHeader = request.headers.get('Authorization');
     if (authHeader === 'Bearer mock-jwt-token') {

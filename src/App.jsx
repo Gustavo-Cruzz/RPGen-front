@@ -14,10 +14,12 @@ function App() {
     <Router>
       <AuthProvider>
         <Routes>
+          {/* Rotas públicas */}
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
 
+          {/* Rotas protegidas (usuário autenticado + personagens disponíveis) */}
           <Route
             path="/my-characters"
             element={
@@ -38,16 +40,6 @@ function App() {
                 </CharactersProvider>
               </ProtectedRoute>
             }
-          />
-          <Route
-          path="/character/:id"
-          element={
-            <ProtectedRoute>
-              <CharactersProvider>
-                <CharacterCreatorPage/>
-              </CharactersProvider>
-            </ProtectedRoute>
-          }
           />
         </Routes>
       </AuthProvider>
