@@ -5,7 +5,8 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import MyCharactersPage from "./pages/MyCharactersPage";
 import CharacterCreatorPage from "./pages/CharacterCreatorPage";
-import {AuthProvider} from "./context/AuthContext";
+import { AuthProvider } from "./context/AuthContext";
+import { CharactersProvider } from "./context/CharactersContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -16,16 +17,28 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/my-characters" element={
-            <ProtectedRoute>
-              <MyCharactersPage />
-            </ProtectedRoute>
-          } />
-          <Route path="/create-character" element={
-            <ProtectedRoute>
-              <CharacterCreatorPage />
-            </ProtectedRoute>
-          } />
+
+          <Route
+            path="/my-characters"
+            element={
+              <ProtectedRoute>
+                <CharactersProvider>
+                  <MyCharactersPage />
+                </CharactersProvider>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/create-character"
+            element={
+              <ProtectedRoute>
+                <CharactersProvider>
+                  <CharacterCreatorPage />
+                </CharactersProvider>
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </AuthProvider>
     </Router>
