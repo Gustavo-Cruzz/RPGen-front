@@ -33,7 +33,6 @@ const CharacterCreatorPage = () => {
   const hasLoaded = useRef(false);
   useEffect(() => {
     if (!hasLoaded.current) {
-      loadCharacter(characterId);
       hasLoaded.current = true;
     }
   }, [characterId, loadCharacter]);
