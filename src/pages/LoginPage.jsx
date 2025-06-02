@@ -15,6 +15,8 @@ const LoginPage = () => {
     try {
       await login(email, password);
       navigate('/my-characters');
+    } catch (err) {
+      setError('Invalid email or password');
     }
   };
 
