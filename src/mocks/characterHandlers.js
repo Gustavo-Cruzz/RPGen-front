@@ -45,12 +45,12 @@ const mockCharacters = [
 
 export const characterHandlers = [
   // Listar personagens
-  http.get(`${backendUrl}/characters`, () => {
+  http.get(`${backendUrl}/my-characters`, () => {
     return HttpResponse.json(mockCharacters);
   }),
 
   // Buscar personagem por ID
-  http.get(`${backendUrl}/characters/:id`, (req) => {
+  http.get(`${backendUrl}/my-characters/:id`, (req) => {
     const { id } = req.params;
     const mockCharacter = mockCharacters.find((c) => c._id === id);
 
@@ -62,7 +62,7 @@ export const characterHandlers = [
   }),
 
   // Criar personagem
-  http.post(`${backendUrl}/characters`, async ({ request }) => {
+  http.post(`${backendUrl}/my-characters`, async ({ request }) => {
     const newCharacter = await request.json();
 
     const savedCharacter = {
@@ -74,7 +74,7 @@ export const characterHandlers = [
   }),
 
   // Atualizar personagem parcialmente (PATCH)
-  http.patch(`${backendUrl}/characters/:id`, async ({ request, params }) => {
+  http.patch(`${backendUrl}/my-characters/:id`, async ({ request, params }) => {
     const { id } = params;
     const updates = await request.json();
 
@@ -92,7 +92,7 @@ export const characterHandlers = [
     return HttpResponse.json(mockCharacters[characterIndex]);
   }),
 
-  http.put(`${backendUrl}/characters/:id`, async ({ request, params }) => {
+  http.put(`${backendUrl}/my-characters/:id`, async ({ request, params }) => {
     const { id } = params;
     const newCharacter = await request.json();
 
@@ -107,7 +107,7 @@ export const characterHandlers = [
     return HttpResponse.json(updated);
   }),
 
-  http.delete(`${backendUrl}/characters/:id`, ({ params }) => {
+  http.delete(`${backendUrl}/my-characters/:id`, ({ params }) => {
     const { id } = params;
     const index = mockCharacters.findIndex((c) => c._id === id);
 

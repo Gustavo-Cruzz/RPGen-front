@@ -11,7 +11,7 @@ export const CharactersProvider = ({ children }) => {
   const fetchCharacters = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await api.get("/characters");
+      const response = await api.get("/my-characters");
       setCharacters(response.data);
     } catch (error) {
       console.error("Erro ao buscar personagens:", error);
@@ -23,7 +23,7 @@ export const CharactersProvider = ({ children }) => {
   // Busca um personagem específico pelo ID
   const getCharacterById = useCallback(async (id) => {
     try {
-      const response = await api.get(`/characters/${id}`);
+      const response = await api.get(`/my-characters/${id}`);
       return response.data;
     } catch (error) {
       console.error(`Erro ao buscar personagem com id ${id}:`, error);
@@ -35,7 +35,7 @@ export const CharactersProvider = ({ children }) => {
   const patchCharacter = useCallback(async (id, changes) => {
     try {
       console.log(changes);
-      const response = await api.patch(`/characters/${id}`, changes);
+      const response = await api.patch(`/my-characters/${id}`, changes);
       // Atualiza o estado local dos personagens (opcional)
       setCharacters((prev) =>
         prev.map((char) => (char._id === id ? { ...char, ...changes } : char))
@@ -50,7 +50,7 @@ export const CharactersProvider = ({ children }) => {
   // Substitui completamente um personagem pelo ID
   const putCharacter = useCallback(async (id, newData) => {
     try {
-      const response = await api.put(`/characters/${id}`, newData);
+      const response = await api.put(`/my-characters/${id}`, newData);
       setCharacters((prev) =>
         prev.map((char) => (char._id === id ? response.data : char))
       );
@@ -64,7 +64,7 @@ export const CharactersProvider = ({ children }) => {
   // Deleta um personagem pelo ID
   const deleteCharacter = useCallback(async (id) => {
     try {
-      await api.delete(`/characters/${id}`);
+      await api.delete(`/my-characters/${id}`);
       // Atualiza o estado local removendo o personagem deletado
       setCharacters((prev) => prev.filter((char) => char._id !== id));
     } catch (error) {

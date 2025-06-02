@@ -237,7 +237,7 @@ const importCharacter = (file) => {
 };
 const saveCharacter = async () => {
   try {
-    const response = await api.post('/characters', character);
+    const response = await api.post('/my-characters', character);
     return response.data;
   } catch (error) {
     console.error('Error saving character:', error);
