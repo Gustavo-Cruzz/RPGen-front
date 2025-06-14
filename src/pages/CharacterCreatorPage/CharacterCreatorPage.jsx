@@ -65,6 +65,7 @@ const CharacterCreatorPage = () => {
       }
       navigate("/my-characters");
     } catch (error) {
+      console.error("Erro ao salvar:", error);
       alert(`Falha ao salvar ${newCharacter ? "personagem" : "alterações"}`);
     }
   };
