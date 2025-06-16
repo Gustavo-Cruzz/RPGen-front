@@ -92,8 +92,9 @@ const CharacterCreatorPage = () => {
           Back to My Characters
         </Link>
         <ImportExportButtons
-          onExport={exportCharacter}
-          onImport={importCharacter}
+           onExport={exportCharacter}
+           onImport={importCharacter}
+           character={character}
         />
         <button onClick={logout} className="logout-button">
           Logout

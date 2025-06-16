@@ -1,6 +1,8 @@
+// ImportExportButtons.jsx
 import React, { useRef } from 'react';
+import { exportToPdf } from './PdfExporter';
 
-const ImportExportButtons = ({ onExport, onImport, className = "generate-btn" }) => {
+const ImportExportButtons = ({ onExport, onImport, character, className = "generate-btn" }) => {
   const fileInputRef = useRef(null);
 
   const handleImportClick = () => {
@@ -19,10 +21,17 @@ const ImportExportButtons = ({ onExport, onImport, className = "generate-btn" })
     }
   };
 
+  const handleExportPdf = () => {
+    exportToPdf(character);
+  };
+
   return (
     <div className="button-group">
       <button onClick={onExport} className={className}>
-        Export Character
+        Export as JSON
+      </button>
+      <button onClick={handleExportPdf} className={className}>
+        Export as PDF
       </button>
       <button onClick={handleImportClick} className={className}>
         Import Character
