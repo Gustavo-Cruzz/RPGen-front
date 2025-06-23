@@ -1,19 +1,21 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useState } from "react"; 
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import { CharactersContext } from "../../context/CharactersContext"; // Importa o contexto
+import { CharactersContext } from "../../context/CharactersContext";
 import CharacterSheet from "./components/characterSheet/CharacterSheet";
-import { useCharacter } from "../../hooks/useCharacter";
+import { useCharacter, initialCharacterState } from "../../hooks/useCharacter";
 import ImportExportButtons from "./components/ImportExportButtons";
 import "./CharacterCreatorPage.css";
 
 const CharacterCreatorPage = () => {
   const { logout } = useContext(AuthContext);
-  const { patchCharacter, putCharacter, deleteCharacter } =
-    useContext(CharactersContext); // Pega patchCharacter do contexto
-  const characterId = useParams().id;
-  const newCharacter = characterId === "new";
-  const navigate = useNavigate();
+  const {
+    patchCharacter,
+    putCharacter,
+    deleteCharacter,
+    getCharacterById,
+  } = useContext(CharactersContext);
+
   const {
     character,
     handleInputChange,
@@ -30,37 +32,69 @@ const CharacterCreatorPage = () => {
     getCharacterChanges,
   } = useCharacter();
 
-  const hasLoaded = useRef(false);
+  const characterId = useParams().id;
+  const newCharacter = characterId === "new";
+  const navigate = useNavigate();
+
+  // Estado para controlar a exibição durante o carregamento dos dados
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    if (!hasLoaded.current) {
-      hasLoaded.current = true;
+    setIsLoading(true);
+
+    if (newCharacter) {
+      // CASO 1: É um personagem novo. Carrega o estado inicial vazio.
+      console.log("É um personagem novo. Carregando estado inicial.");
+      loadCharacter(initialCharacterState);
+      setIsLoading(false);
+    } else {
+      // CASO 2: É um personagem existente. Busca os dados da API.
+      console.log(`É um personagem existente (ID: ${characterId}). Buscando dados...`);
+      const fetchCharacterData = async () => {
+        try {
+          const data = await getCharacterById(characterId);
+          if (data) {
+            loadCharacter(data);
+          } else {
+            console.warn("Personagem não encontrado. Carregando formulário em branco.");
+            loadCharacter(initialCharacterState);
+            // navegar de volta 
+            navigate("/my-characters");
+          }
+        } catch (error) {
+          console.error("Falha ao carregar o personagem:", error);
+          // Em caso de erro, carrega o estado inicial para não quebrar a UI
+          loadCharacter(initialCharacterState);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      
+      fetchCharacterData();
     }
-  }, [characterId, loadCharacter]);
+  }, [characterId, newCharacter, getCharacterById, loadCharacter]); 
 
   const handleSave = async () => {
     try {
-      const changedFields = getCharacterChanges();
       if (newCharacter) {
+        // Para um personagem novo, sempre usar POST
         await saveCharacter();
       } else {
-        switch (changedFields.length) {
-          case 0:
-            console.log("Nenhuma alteração foi feita.");
-            break;
-          case 16:
-            console.log("Alterando o personagem com PUT");
-            // Chama o putCharacter com o personagem completo
-            await putCharacter(characterId, character);
-            break;
-          default:
-            // Monta o objeto com as alterações para o patch
-            const changes = {};
-            changedFields.forEach((field) => {
-              changes[field] = character[field];
-            });
-            console.log("Alterações (PATCH):", changes);
-            await patchCharacter(characterId, changes);
-            break;
+        // Para um personagem existente, verificar as alterações
+        const changedFields = getCharacterChanges();
+
+          if (changedFields.length === 0) {
+          console.log("Nenhuma alteração foi feita.");
+        } else if (changedFields.length >= 16) {
+          console.log("Alterando o personagem com PUT (todos os campos)");
+          await putCharacter(characterId, character);
+        } else {
+          const changes = {};
+          changedFields.forEach((field) => {
+            changes[field] = character[field];
+          });
+          console.log("Alterações (PATCH):", changes);
+          await patchCharacter(characterId, changes);
         }
       }
       navigate("/my-characters");
@@ -76,14 +110,25 @@ const CharacterCreatorPage = () => {
       return;
     }
 
-    try {
-      await deleteCharacter(characterId);
-      navigate("/my-characters");
-    } catch (error) {
-      alert("Falha ao deletar o personagem. Tente novamente.");
-      console.error("Erro ao deletar personagem:", error);
+    if (window.confirm("Você tem certeza que deseja deletar este personagem? Esta ação não pode ser desfeita.")) {
+      try {
+        await deleteCharacter(characterId);
+        navigate("/my-characters");
+      } catch (error) {
+        alert("Falha ao deletar o personagem. Tente novamente.");
+        console.error("Erro ao deletar personagem:", error);
+      }
     }
   };
+
+  // Exibe uma mensagem de "Carregando" enquanto os dados não estão prontos
+  if (isLoading) {
+    return (
+      <div className="creator-container">
+        <h1>Carregando Personagem...</h1>
+      </div>
+    );
+  }
 
   return (
     <div className="creator-container">
@@ -130,7 +175,7 @@ const CharacterCreatorPage = () => {
       <button onClick={handleSave} className="save-button">
         {newCharacter ? "Save Character" : "Save Changes"}
       </button>
-      <button onClick={handleDelete} className="save-button">
+      <button onClick={handleDelete} className="save-button delete-button">
         {newCharacter ? "Cancel" : "Delete Character"}
       </button>
     </div>
