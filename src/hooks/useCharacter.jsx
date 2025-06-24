@@ -78,7 +78,7 @@ const getCharacterChanges = useCallback(() => {
 
   const generateTextWithLLM = async () => {
     setIsGeneratingText(true);
-    const backend_url = `${process.env.REACT_APP_BACKEND_URL}api/gerar-texto`;
+    const backend_url = `${process.env.REACT_APP_BACKEND_URL}/api_bp/gerar-texto`;
     try {
       const response = await fetch(backend_url, {
         method: "POST",
@@ -144,7 +144,7 @@ const getCharacterChanges = useCallback(() => {
     setIsGeneratingImage(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}api/gerar-imagem`,
+        `${process.env.REACT_APP_BACKEND_URL}/api_bp/gerar-imagem`,
         {
           method: "POST",
           headers: {
@@ -212,7 +212,7 @@ const getCharacterChanges = useCallback(() => {
 
   useEffect(() => {
     loadCharacter();
-  }, []);
+  }, [loadCharacter]);
   const exportCharacter = () => {
   const dataStr = JSON.stringify(character, null, 2);
   const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
