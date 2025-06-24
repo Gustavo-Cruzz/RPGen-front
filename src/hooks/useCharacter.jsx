@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../services/api"
-const initialCharacterState = {
+export const initialCharacterState = {
   name: "",
   class: "",
   race: "",
@@ -256,7 +256,8 @@ const saveCharacter = async () => {
     generateImage,
     resetCharacter,
     exportCharacter, 
-    importCharacter, 
+    importCharacter,
+    loadCharacter,  
   };
   
 };
