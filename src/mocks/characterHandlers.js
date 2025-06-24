@@ -92,6 +92,7 @@ export const characterHandlers = [
     return HttpResponse.json(mockCharacters[characterIndex]);
   }),
 
+  // Atualizar personagem completamente (PUT)
   http.put(`${backendUrl}/my-characters/:id`, async ({ request, params }) => {
     const { id } = params;
     const newCharacter = await request.json();
@@ -107,6 +108,7 @@ export const characterHandlers = [
     return HttpResponse.json(updated);
   }),
 
+  // Deletar personagem
   http.delete(`${backendUrl}/my-characters/:id`, ({ params }) => {
     const { id } = params;
     const index = mockCharacters.findIndex((c) => c._id === id);
@@ -122,6 +124,7 @@ export const characterHandlers = [
     });
   }),
 
+  // Gerar texto por IA
   http.post(`${backendUrl}/api/gerar-texto`, async ({ request }) => {
     const { prompt } = await request.json();
 
@@ -133,7 +136,7 @@ export const characterHandlers = [
     const fakeBackstory = `[História dramática sobre ${name}]`;
 
     return HttpResponse.json({
-      "Generated Text": fakeBackstory,
+      "generated_text": fakeBackstory,
     });
   }),
 ];

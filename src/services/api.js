@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_URL || 'https://rp-gen-back.vercel.app',
-  timeout: 10000, // 10 segundos
+  timeout: 20_000, // 20 segundos
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
