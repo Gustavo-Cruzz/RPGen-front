@@ -6,6 +6,8 @@ export const CharactersContext = createContext();
 export const CharactersProvider = ({ children }) => {
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(true);
+  let numCharacters = characters.length;
+  const maxCharacters = 10;
 
   // Busca todos os personagens do usuário autenticado
   const fetchCharacters = useCallback(async () => {
@@ -88,6 +90,8 @@ export const CharactersProvider = ({ children }) => {
         patchCharacter,
         putCharacter,
         deleteCharacter,
+        numCharacters,
+        maxCharacters
       }}
     >
       {children}

@@ -10,6 +10,8 @@ import "./CharacterCreatorPage.css";
 const CharacterCreatorPage = () => {
   const { logout } = useContext(AuthContext);
   const {
+    numCharacters,
+    maxCharacters,
     patchCharacter,
     putCharacter,
     deleteCharacter,
@@ -43,11 +45,17 @@ const CharacterCreatorPage = () => {
     setIsLoading(true);
 
     if (newCharacter) {
+
+      // Redireciona o usuário caso ele já tenha atingido o limite de personagens
+      if (numCharacters >= maxCharacters){
+        navigate("/my-characters");
+      }
+
       // CASO 1: É um personagem novo. Carrega o estado inicial vazio.
       console.log("É um personagem novo. Carregando estado inicial.");
       loadCharacter(initialCharacterState);
       setIsLoading(false);
-    } else {
+  } else {
       // CASO 2: É um personagem existente. Busca os dados da API.
       console.log(`É um personagem existente (ID: ${characterId}). Buscando dados...`);
       const fetchCharacterData = async () => {
@@ -72,7 +80,7 @@ const CharacterCreatorPage = () => {
       
       fetchCharacterData();
     }
-  }, [characterId, newCharacter, getCharacterById, loadCharacter]); 
+  }, [characterId, newCharacter, getCharacterById, loadCharacter, navigate, maxCharacters, numCharacters]); 
 
   const handleSave = async () => {
     try {
