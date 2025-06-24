@@ -21,6 +21,7 @@ export const initialCharacterState = {
 
 export const useCharacter = () => {
   const [character, setCharacter] = useState(initialCharacterState);
+  const [originalCharacter, setOriginalCharacter] = useState(null);
   const [isGeneratingText, setIsGeneratingText] = useState(false);
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
   const [generatedText, setGeneratedText] = useState("");
@@ -37,6 +38,11 @@ export const useCharacter = () => {
     }));
   };
 
+   const setCharacterAndOriginal = (charData) => {
+    setCharacter(charData);
+    setOriginalCharacter(charData);
+  };
+
   const handleInputChange = (e) => {
     var { name, value } = e.target;
   // Para campos numéricos, removemos qualquer unidade antes de atualizar
@@ -49,28 +55,23 @@ export const useCharacter = () => {
   }
   };
 
-  const loadCharacter = () => {
-    const savedCharacter = localStorage.getItem("dndCharacter");
-    console.log("Loading from localStorage:", savedCharacter); // Debug log
-    if (savedCharacter) {
-      try {
-        const parsed = JSON.parse(savedCharacter);
-        console.log("Parsed character data:", parsed);
-        setCharacter(parsed);
-      } catch (error) {
-        console.error("Failed to parse character:", error);
-      }
-    }
+  const loadCharacter = (charData) => {
+    console.log("Loading character data into hook:", charData);
+    setCharacterAndOriginal(charData);
   };
-  const getCharacterChanges = () => {
+
+const getCharacterChanges = () => {
+  if (!originalCharacter || !character) return []; 
+  
   const changes = [];
   Object.keys(character).forEach(key => {
-    if (character[key] !== initialCharacterState[key]) {
+    if (JSON.stringify(character[key]) !== JSON.stringify(originalCharacter[key])) {
       changes.push(key);
     }
   });
   return changes;
 };
+
   const generateTextWithLLM = async () => {
     setIsGeneratingText(true);
     const backend_url = `${process.env.REACT_APP_BACKEND_URL}api/gerar-texto`;
