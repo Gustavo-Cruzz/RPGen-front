@@ -6,7 +6,7 @@ import "./MyCharactersPage.css";
 
 const MyCharactersPage = () => {
   // Acesso ao estado global de personagens
-  const { characters, loading, fetchCharacters } =
+  const { characters, loading, fetchCharacters, maxCharacters, numCharacters} =
     useContext(CharactersContext);
 
   const hasFetched = useRef(false);
@@ -39,13 +39,17 @@ const MyCharactersPage = () => {
       </div>
 
       <h1>Meus personagens</h1>
-
+      <h2>
+        Número de personagens: {numCharacters}/{maxCharacters}
+      </h2>
       {/* Grade com os personagens */}
       <div className="characters-grid">
         {/* Card para criar novo personagem */}
-        <Link to="/character/new" className="new-character-card">
-          + Criar novo personagem
-        </Link>
+        {numCharacters < maxCharacters && (
+          <Link to="/character/new" className="new-character-card">
+            + Criar novo personagem
+          </Link>
+        )}
 
         {/* Lista dos personagens existentes */}
         {characters.map((character) => (
