@@ -25,7 +25,7 @@ const CharacterCreatorPage = () => {
     generatedText,
     generatedImageUrl,
     generateTextWithLLM,
-    generateImageWithHuggingFace,
+    generateImage,
     exportCharacter,
     importCharacter,
     loadCharacter,
@@ -167,7 +167,7 @@ const CharacterCreatorPage = () => {
         isGeneratingText={isGeneratingText}
         isGeneratingImage={isGeneratingImage}
         generateTextWithLLM={generateTextWithLLM}
-        generateImageWithHuggingFace={generateImageWithHuggingFace}
+        generateImage={generateImage}
         generatedText={generatedText}
         generatedImageUrl={generatedImageUrl}
       />

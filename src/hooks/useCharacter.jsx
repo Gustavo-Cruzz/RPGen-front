@@ -62,7 +62,15 @@ export const useCharacter = () => {
       }
     }
   };
-
+  const getCharacterChanges = () => {
+  const changes = [];
+  Object.keys(character).forEach(key => {
+    if (character[key] !== initialCharacterState[key]) {
+      changes.push(key);
+    }
+  });
+  return changes;
+};
   const generateTextWithLLM = async () => {
     setIsGeneratingText(true);
     const backend_url = `${process.env.REACT_APP_BACKEND_URL}api/gerar-texto`;
@@ -257,7 +265,8 @@ const saveCharacter = async () => {
     resetCharacter,
     exportCharacter, 
     importCharacter,
-    loadCharacter,  
+    loadCharacter,
+    getCharacterChanges,  
   };
   
 };
