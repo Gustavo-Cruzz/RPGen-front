@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import api from "../services/api";
-
-export const initialCharacterState = {
+import api from "../services/api"
+const initialCharacterState = {
   name: "",
   class: "",
   race: "",
@@ -22,21 +21,16 @@ export const initialCharacterState = {
 
 export const useCharacter = () => {
   const [character, setCharacter] = useState(initialCharacterState);
-  // Estado para guardar a versão original do personagem ao carregar a página
-  const [originalCharacter, setOriginalCharacter] = useState(null);
-
   const [isGeneratingText, setIsGeneratingText] = useState(false);
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
   const [generatedText, setGeneratedText] = useState("");
   const [generatedImageUrl, setGeneratedImageUrl] = useState("");
 
-  // Função para definir o personagem e guardar o estado original para comparação
-  const setCharacterAndOriginal = (charData) => {
-    setCharacter(charData);
-    setOriginalCharacter(charData);
-  };
-
   const characterUpdate = (name, value) => {
+    console.groupCollapsed(`Updating character.${name}`);
+    console.log("Previous value:", character[name]);
+    console.log("New value:", value);
+    console.groupEnd();
     setCharacter((prev) => ({
       ...prev,
       [name]: value,
@@ -45,32 +39,28 @@ export const useCharacter = () => {
 
   const handleInputChange = (e) => {
     var { name, value } = e.target;
-    if (name === "height" || name === "weight" || name === "age") {
-      const numericValue = value.replace(/[^0-9]/g, "");
-      characterUpdate(name, numericValue);
-    } else {
-      characterUpdate(name, value);
-    }
+  // Para campos numéricos, removemos qualquer unidade antes de atualizar
+  if (name === "height" || name === "weight" || name === "age") {
+    // Remove unidades e caracteres não numéricos, mantendo apenas números
+    const numericValue = value.replace(/[^0-9]/g, '');
+    characterUpdate(name, numericValue);
+  } else {
+    characterUpdate(name, value);
+  }
   };
 
-
-  const loadCharacter = (charData) => {
-    console.log("Loading character data into hook:", charData);
-    setCharacterAndOriginal(charData);
-  };
-  
-  const getCharacterChanges = () => {
-    if (!originalCharacter) {
-      // Se não há personagem original, todas as chaves são consideradas mudanças (caso de um personagem novo)
-      return Object.keys(character);
-    }
-    const changes = [];
-    for (const key in character) {
-      if (character[key] !== originalCharacter[key]) {
-        changes.push(key);
+  const loadCharacter = () => {
+    const savedCharacter = localStorage.getItem("dndCharacter");
+    console.log("Loading from localStorage:", savedCharacter); // Debug log
+    if (savedCharacter) {
+      try {
+        const parsed = JSON.parse(savedCharacter);
+        console.log("Parsed character data:", parsed);
+        setCharacter(parsed);
+      } catch (error) {
+        console.error("Failed to parse character:", error);
       }
     }
-    return changes;
   };
 
   const generateTextWithLLM = async () => {
@@ -224,22 +214,27 @@ export const useCharacter = () => {
 
 const importCharacter = (file) => {
   return new Promise((resolve, reject) => {
-        const fileReader = new FileReader();
-        fileReader.onload = (event) => {
-          try {
-            const parsedData = JSON.parse(event.target.result);
-            setCharacterAndOriginal(parsedData); 
-            resolve(parsedData);
-          } catch (error) {
-            reject(error);
-          }
-        };
-        fileReader.onerror = (error) => reject(error);
-        fileReader.readAsText(file);
-    });
-  };
-
-
+    const fileReader = new FileReader();
+    
+    fileReader.onload = (event) => {
+      try {
+        const parsedData = JSON.parse(event.target.result);
+        console.log("Dados importados:", parsedData);
+        setCharacter(parsedData);
+        resolve(parsedData);
+      } catch (error) {
+        console.error("Erro ao importar:", error);
+        reject(error);
+      }
+    };
+    
+    fileReader.onerror = (error) => {
+      console.error("Erro no FileReader:", error);
+      reject(error);
+    };
+    fileReader.readAsText(file);
+  });
+};
 const saveCharacter = async () => {
   try {
     const response = await api.post('/my-characters', character);
@@ -262,8 +257,6 @@ const saveCharacter = async () => {
     resetCharacter,
     exportCharacter, 
     importCharacter, 
-    loadCharacter,       
-    getCharacterChanges, 
   };
   
 };
