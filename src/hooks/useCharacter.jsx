@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import api from "../services/api"
 export const initialCharacterState = {
   name: "",
@@ -38,10 +38,10 @@ export const useCharacter = () => {
     }));
   };
 
-   const setCharacterAndOriginal = (charData) => {
-    setCharacter(charData);
-    setOriginalCharacter(charData);
-  };
+  const setCharacterAndOriginal = useCallback((charData) => {
+  setCharacter({...charData});
+  setOriginalCharacter({...charData});
+}, []);
 
   const handleInputChange = (e) => {
     var { name, value } = e.target;
@@ -55,22 +55,26 @@ export const useCharacter = () => {
   }
   };
 
-  const loadCharacter = (charData) => {
-    console.log("Loading character data into hook:", charData);
-    setCharacterAndOriginal(charData);
-  };
-
-const getCharacterChanges = () => {
-  if (!originalCharacter || !character) return []; 
+const loadCharacter = useCallback((charData) => {
+  if (!charData) return;
   
-  const changes = [];
-  Object.keys(character).forEach(key => {
-    if (JSON.stringify(character[key]) !== JSON.stringify(originalCharacter[key])) {
+  console.log("Loading character data into hook:", charData);
+  setCharacterAndOriginal(charData);
+}, [setCharacterAndOriginal]);
+
+const getCharacterChanges = useCallback(() => {
+  if (!originalCharacter || !character) return [];
+  const changes = []; 
+  const allKeys = new Set([...Object.keys(character), ...Object.keys(originalCharacter)]);
+  allKeys.forEach(key => {
+    const currentVal = character[key];
+    const originalVal = originalCharacter[key];
+    if (JSON.stringify(currentVal) !== JSON.stringify(originalVal)) {
       changes.push(key);
     }
   });
   return changes;
-};
+}, [character, originalCharacter]);
 
   const generateTextWithLLM = async () => {
     setIsGeneratingText(true);
