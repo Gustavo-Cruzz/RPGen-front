@@ -125,7 +125,7 @@ export const characterHandlers = [
   }),
 
   // Gerar texto por IA
-  http.post(`${backendUrl}/api_bp/gerar-texto`, async ({ request }) => {
+  http.post(`${backendUrl}/api/gerar-texto`, async ({ request }) => {
     const { prompt } = await request.json();
 
     // Extração simples do nome do personagem a partir do prompt
@@ -136,7 +136,7 @@ export const characterHandlers = [
     const fakeBackstory = `[História dramática sobre ${name}]`;
 
     return HttpResponse.json({
-      "Generated Text": fakeBackstory,
+      "generated_text": fakeBackstory,
     });
   }),
 ];

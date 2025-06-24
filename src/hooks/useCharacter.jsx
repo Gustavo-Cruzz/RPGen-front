@@ -78,59 +78,49 @@ const getCharacterChanges = useCallback(() => {
 
   const generateTextWithLLM = async () => {
     setIsGeneratingText(true);
-    const backend_url = `${process.env.REACT_APP_BACKEND_URL}/api_bp/gerar-texto`;
     try {
-      const response = await fetch(backend_url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          prompt:
-            "Make a backstory for a D&D character using this information as base:" +
-            "\nName:" +
-            character.name +
-            "\nClass:" +
-            character.class +
-            "\nRace:" +
-            character.race +
-            "\nGender:" +
-            character.gender +
-            "\nAge:" +
-            character.age +
-            "\nHeight:" +
-            character.height +
-            "\nWeight:" +
-            character.weight +
-            "\nEye color:" +
-            character.eyeColor +
-            "\nSkin color:" +
-            character.skinColor +
-            "\nHair color:" +
-            character.hairColor +
-            "\nDescription:" +
-            character.description +
-            "\nAllies:" +
-            character.allies +
-            "\nNotes:" +
-            character.notes +
-            "\nTraits:" +
-            character.traits +
-            "\nEquipment:" +
-            character.equipment +
-            "." +
-            "\n Write only the backstory, no other information or text.",
-        }),
+      const response = await api.post('/api/gerar-texto', {
+        prompt:
+          "Make a backstory for a D&D character using this information as base:" +
+          "\nName:" +
+          character.name +
+          "\nClass:" +
+          character.class +
+          "\nRace:" +
+          character.race +
+          "\nGender:" +
+          character.gender +
+          "\nAge:" +
+          character.age +
+          "\nHeight:" +
+          character.height +
+          "\nWeight:" +
+          character.weight +
+          "\nEye color:" +
+          character.eyeColor +
+          "\nSkin color:" +
+          character.skinColor +
+          "\nHair color:" +
+          character.hairColor +
+          "\nDescription:" +
+          character.description +
+          "\nAllies:" +
+          character.allies +
+          "\nNotes:" +
+          character.notes +
+          "\nTraits:" +
+          character.traits +
+          "\nEquipment:" +
+          character.equipment +
+          "." +
+          "\n Write only the backstory, no other information or text.",
       });
-      console.log("Backend URL:", backend_url);
-      if (response.ok) {
-        const data = await response.json();
-
-        setGeneratedText(data["Generated Text"]);
-        characterUpdate("history", data["Generated Text"]);
+      if (response.data && response.data["generated_text"]) {
+        setGeneratedText(response.data["generated_text"]);
+        characterUpdate("history", response.data["generated_text"]);
       } else {
-        console.error("Failed to generate text:", response.statusText);
         setGeneratedText("Failed to generate backstory.");
+        console.error("Unexpected response:", response.data);
       }
     } catch (error) {
       console.error("Error generating text:", error);
@@ -144,7 +134,7 @@ const getCharacterChanges = useCallback(() => {
     setIsGeneratingImage(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/api_bp/gerar-imagem`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/gerar-imagem`,
         {
           method: "POST",
           headers: {
