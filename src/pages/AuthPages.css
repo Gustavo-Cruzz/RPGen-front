@@ -1,0 +1,128 @@
+:root {
+  --dnd-red: #58180D;
+  --dnd-gold: #C9AD6A;
+  --dnd-parchment: #F2E5BC;
+  --dnd-metallic: #E0E0E0;
+  --dnd-light: #E8D8C3;
+  --dnd-border: #3C2F1E;
+}
+
+
+.auth-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: var(--dnd-parchment);
+  border: 3px ridge var(--dnd-gold);
+  box-shadow: 0 0 20px rgba(87, 60, 30, 0.4);
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.auth-header h1 {
+  color: var(--dnd-red);
+  font-family: "Modesto Condensed", serif;
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  text-align: center;
+  margin-bottom: 2rem;
+  margin-top: 0.5rem;
+}
+
+.auth-header h2 {
+  color: var(--dnd-red);
+  font-family: "Modesto Condensed", serif;
+  font-size: 2rem;
+  border-bottom: 2px solid var(--dnd-gold);
+  padding-bottom: 0.5rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-button {
+  background-color: var(--dnd-red);
+  color: var(--dnd-parchment);
+  border: none;
+  padding: 12px 24px;
+  font-family: "Modesto Condensed", serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 1rem;
+}
+
+.auth-button:hover {
+  background-color: #6D2013;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: var(--dnd-red);
+}
+
+.auth-link {
+  color: var(--dnd-red);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+.auth-error {
+  color: #d32f2f;
+  background-color: #ffebee;
+  padding: 0.5rem;
+  border-radius: 4px;
+  text-align: center;
+}
+
+/* Tema escuro */
+[data-theme="dark"] .auth-container {
+  background-color: #2E2E2E;
+  border: 3px ridge var(--dnd-gold);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .auth-header h1,
+[data-theme="dark"] .auth-header h2,
+[data-theme="dark"] .auth-footer,
+[data-theme="dark"] .auth-link {
+  color: var(--dnd-gold);
+}
+
+[data-theme="dark"] .auth-header h2 {
+  border-bottom: 2px solid var(--dnd-gold);
+}
+
+[data-theme="dark"] .auth-button {
+  background-color: var(--dnd-border);
+  color: var(--dnd-gold);
+}
+
+[data-theme="dark"] .auth-button:hover {
+  background-color: #5D4037;
+}
+
+[data-theme="dark"] .auth-link:hover {
+  text-decoration: underline;
+}
+
+[data-theme="dark"] .auth-error {
+  background-color: #3b1e1e;
+  color: #ffcdd2;
+  border: 1px solid #c62828;
+}
+

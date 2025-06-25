@@ -1,5 +1,6 @@
+// src/components/Header.jsx
 import React from 'react';
-import { useTheme } from '../hooks/ThemeContext';
+import { useTheme } from '../context/ThemeContext';
 
 const Header = ({ saveCharacter }) => {
   const { theme, toggleTheme } = useTheme();
@@ -11,8 +12,10 @@ const Header = ({ saveCharacter }) => {
       <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
         <button onClick={saveCharacter} className="save-btn">
           Save Character
-          <br/>
-          <span className="save-tooltip"><h6>(Work In Progress)</h6></span>
+          <br />
+          <span className="save-tooltip">
+            <h6>(Work In Progress)</h6>
+          </span>
         </button>
 
         <button onClick={toggleTheme} className="save-btn" style={{ padding: '10px' }}>
