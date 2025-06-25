@@ -1,0 +1,44 @@
+:root {
+  --dnd-red: #58180D;
+  --dnd-gold: #C9AD6A;
+  --dnd-parchment: #F2E5BC;
+  --dnd-metallic: #E0E0E0;
+  --dnd-light: #E8D8C3;
+  --dnd-border: #3C2F1E;
+}
+
+.language-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+
+
+.language-select {
+  background-color: var(--dnd-red);
+  color: var(--dnd-parchment);
+  border: 2px solid var(--dnd-gold);
+  padding: 10px 20px;
+  border-radius: 0;
+  cursor: pointer;
+  font-weight: 700;
+  font-family: "Modesto Condensed", serif;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+
+.language-select:hover {
+  border-color: #007bff;
+}
+
+.language-select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+
+

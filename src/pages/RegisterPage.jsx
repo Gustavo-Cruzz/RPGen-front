@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
+import LanguageSelector from '../components/LanguageSelector';
 import './AuthPages.css';
 
 const RegisterPage = () => {
@@ -9,6 +11,7 @@ const RegisterPage = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const { register } = useContext(AuthContext);
+  const { t } = useLanguage();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -23,19 +26,23 @@ const RegisterPage = () => {
 
   return (
     <div className="auth-container">
+      <div className="language-selector-container">
+        <LanguageSelector />
+      </div>
+      
       <div className="auth-header">
           <Link to="/" className="auth-button">
           Back to Home
         </Link>
         <h1>RPGen</h1>
-        <h2>Register</h2>
+        <h2>{t('registerTitle')}</h2>
       </div>
       
       <form onSubmit={handleSubmit} className="auth-form">
         {error && <div className="auth-error">{error}</div>}
         
         <div className="form-group">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">{t('name')}</label>
           <input
             id="username"
             type="text"
@@ -46,7 +53,7 @@ const RegisterPage = () => {
         </div>
         
         <div className="form-group">
-          <label htmlFor="email">E-mail</label>
+          <label htmlFor="email">{t('email')}</label>
           <input
             id="email"
             type="email"
@@ -57,7 +64,7 @@ const RegisterPage = () => {
         </div>
         
         <div className="form-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">{t('password')}</label>
           <input
             id="password"
             type="password"
@@ -67,12 +74,12 @@ const RegisterPage = () => {
           />
         </div>
         
-        <button type="submit" className="auth-button">Register</button>
+        <button type="submit" className="auth-button">{t('registerButton')}</button>
       </form>
       
       <div className="auth-footer">
-        <p>Or, if you already have an account</p>
-        <Link to="/login" className="auth-link">Login</Link>
+        <p>{t('haveAccount')}</p>
+        <Link to="/login" className="auth-link">{t('loginHere')}</Link>
       </div>
     </div>
   );

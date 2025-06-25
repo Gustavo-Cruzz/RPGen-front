@@ -7,6 +7,18 @@
   --dnd-border: #3C2F1E;
 }
 
+.creator-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.language-selector-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
 * {
   margin: 0;
   padding: 0;

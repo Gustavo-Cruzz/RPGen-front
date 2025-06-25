@@ -18,6 +18,12 @@
   background-attachment: fixed;
 }
 
+.language-selector-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
 .app-header {
   text-align: center;
   margin-bottom: 3rem;

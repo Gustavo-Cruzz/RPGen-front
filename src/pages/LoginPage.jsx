@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
+import LanguageSelector from '../components/LanguageSelector';
 import './AuthPages.css';
 
 const LoginPage = () => {
@@ -8,6 +10,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const { login } = useContext(AuthContext);
+  const { t } = useLanguage();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -22,19 +25,23 @@ const LoginPage = () => {
 
   return (
     <div className="auth-container">
+      <div className="language-selector-container">
+        <LanguageSelector />
+      </div>
+      
       <div className="auth-header">
          <Link to="/" className="auth-button">
           Back to Home
         </Link>
         <h1>RPGen</h1>
-        <h2>Login</h2>
+        <h2>{t('loginTitle')}</h2>
       </div>
       
       <form onSubmit={handleSubmit} className="auth-form">
         {error && <div className="auth-error">{error}</div>}
         
         <div className="form-group">
-          <label htmlFor="email">E-mail</label>
+          <label htmlFor="email">{t('email')}</label>
           <input
             id="email"
             type="email"
@@ -45,7 +52,7 @@ const LoginPage = () => {
         </div>
         
         <div className="form-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">{t('password')}</label>
           <input
             id="password"
             type="password"
@@ -55,12 +62,12 @@ const LoginPage = () => {
           />
         </div>
         
-        <button type="submit" className="auth-button">Login</button>
+        <button type="submit" className="auth-button">{t('loginButton')}</button>
       </form>
       
       <div className="auth-footer">
-        <p>Or, if you don't have an account yet</p>
-        <Link to="/register" className="auth-link">Register</Link>
+        <p>{t('noAccount')}</p>
+        <Link to="/register" className="auth-link">{t('registerHere')}</Link>
       </div>
     </div>
   );

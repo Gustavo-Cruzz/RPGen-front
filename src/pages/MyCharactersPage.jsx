@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { CharactersContext } from "../context/CharactersContext";
 import { AuthContext } from "../context/AuthContext";
+import { useLanguage } from "../context/LanguageContext";
+import LanguageSelector from "../components/LanguageSelector";
 import "./MyCharactersPage.css";
 
 const MyCharactersPage = () => {
@@ -20,34 +22,41 @@ const MyCharactersPage = () => {
 
   // Acesso à função de logout do contexto de autenticação
   const { logout } = useContext(AuthContext);
+  
+  // Acesso às traduções
+  const { t } = useLanguage();
 
   // Enquanto os personagens estão sendo carregados, exibe feedback visual
   if (loading) {
-    return <div>Carregando personagens...</div>;
+    return <div>{t('loadingCharacters')}</div>;
   }
 
   return (
     <div className="my-characters-container">
+      <div className="language-selector-container">
+        <LanguageSelector />
+      </div>
+      
       {/* Barra de navegação superior */}
       <div className="header-nav">
         <Link to="/" className="nav-link">
-          Homepage
+          {t('homepage')}
         </Link>
         <button onClick={logout} className="logout-button">
-          Logout
+          {t('logout')}
         </button>
       </div>
 
-      <h1>Meus personagens</h1>
+      <h1>{t('myCharacters')}</h1>
       <h2>
-        Número de personagens: {numCharacters}/{maxCharacters}
+        {t('numberOfCharacters')}: {numCharacters}/{maxCharacters}
       </h2>
       {/* Grade com os personagens */}
       <div className="characters-grid">
         {/* Card para criar novo personagem */}
         {numCharacters < maxCharacters && (
           <Link to="/character/new" className="new-character-card">
-            + Criar novo personagem
+            + {t('createNewCharacter')}
           </Link>
         )}
 
