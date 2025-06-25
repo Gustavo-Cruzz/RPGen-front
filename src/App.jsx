@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import CharacterSheet from "./components/characterSheet/CharacterSheet";
 import Footer from "./components/Footer";
 import { useCharacter } from "./hooks/useCharacter";
+import { ThemeProvider } from './hooks/ThemeContext';
 
 function App() {
   const {
