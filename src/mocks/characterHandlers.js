@@ -1,5 +1,5 @@
 import { http, HttpResponse } from "msw";
-// import { character } from "../hooks/useCharacter";
+import { imagem_base64_texto } from "./base64Image";
 const backendUrl = process.env.REACT_APP_BACKEND_URL || "";
 
 const mockCharacters = [
@@ -137,6 +137,15 @@ export const characterHandlers = [
 
     return HttpResponse.json({
       "generated_text": fakeBackstory,
+    });
+  }),
+
+  // Gerar imagem por IA
+  http.post(`${backendUrl}/api/gerar-imagem`,async() => {
+    const imagem_base64 = imagem_base64_texto;
+
+    return HttpResponse.json({
+      'imagem_base64': imagem_base64,
     });
   }),
 ];
