@@ -36,6 +36,7 @@ const GenerationSection = ({
           <img
             src={generatedImageUrl}
             alt={`Generated portrait of ${character.name}`}
+            width={300}
           />
           <DownloadButton url={generatedImageUrl} />
         </div>
