@@ -173,19 +173,28 @@ textarea {
   width: 100%;
 }
 
+.button-group {
+  width: 80%;
+  display: flex;
+  column-gap: 2%;
+  height: 100%;
+  align-items: center;
+  margin-left: 2rem;
+}
+
 .generate-btn,
 .download-btn {
   background-color: var(--dnd-red);
   color: var(--dnd-parchment);
-  border: 2px solid var(--dnd-gold);
   padding: 10px 20px;
   border-radius: 0;
   cursor: pointer;
   font-weight: 700;
   font-family: "Modesto Condensed", serif;
-  margin-right: 10px;
-  margin-bottom: 10px;
   letter-spacing: 0.5px;
+}
+.generate-btn {
+  border: 2px solid var(--dnd-gold);
 }
 
 .generate-btn:hover,
