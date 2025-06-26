@@ -161,7 +161,17 @@ textarea {
   background-color: #6D2013;
 }
 
-.generate-btn {
+.generation-section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.generation-section h2{
+  width: 100%;
+}
+
+.generate-btn, .download-btn {
   background-color: var(--dnd-red);
   color: var(--dnd-parchment);
   border: 2px solid var(--dnd-gold);
@@ -175,7 +185,7 @@ textarea {
   letter-spacing: 0.5px;
 }
 
-.generate-btn:hover {
+.generate-btn:hover, .download-btn:hover {
   background-color: #6D2013;
 }
 
@@ -195,30 +205,22 @@ textarea {
 }
 
 .generated-image {
-  margin-top: 20px;
+  width: 50%;
   text-align: center;
-  border: 2px solid var(--dnd-border);
-  padding: 10px;
-  background-color: white;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .generated-image img {
+  margin-top: 10px;
+  margin-bottom: 10px;
   max-width: 100%;
-  border: 1px solid var(--dnd-border);
+  border: 2px solid var(--dnd-border);
 }
 
 .download-btn {
-  background-color: var(--dnd-gold);
-  color: var(--dnd-light);
-  border: none;
-  padding: 8px 16px;
-  margin-top: 10px;
-  font-family: "Modesto Condensed", serif;
-  font-weight: 700;
-}
-
-.download-btn:hover {
-  background-color: #D9C48E;
+  width: 100%;
 }
 
 @media (max-width: 768px) {

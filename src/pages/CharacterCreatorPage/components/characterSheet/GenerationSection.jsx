@@ -13,7 +13,7 @@ const GenerationSection = ({
   return (
     <div className="generation-section">
       <h2>AI Generation</h2>
-      
+
       <div className="button-group">
         <GenerationButton
           onClick={generateTextWithLLM}
@@ -21,18 +21,17 @@ const GenerationSection = ({
           loadingText="Generating Backstory..."
           defaultText="Generate Backstory"
         />
-        
+
         <GenerationButton
           onClick={generateImage}
           disabled={isGeneratingImage}
           loadingText="Generating Image..."
-          defaultText="Image Gen - Work In Progress"
+          defaultText="Generate Image"
         />
       </div>
 
       {generatedImageUrl && (
         <div className="generated-image">
-          <h3>Generated Character Image</h3>
           <img
             src={generatedImageUrl}
             alt={`Generated portrait of ${character.name}`}

@@ -133,65 +133,56 @@ const getCharacterChanges = useCallback(() => {
   const generateImage = async () => {
     setIsGeneratingImage(true);
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/api/gerar-imagem`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            prompt:
-              "Make an image for a D&D character using this information as base:" +
-              "\nName:" +
-              character.name +
-              "\nClass:" +
-              character.class +
-              "\nRace:" +
-              character.race +
-              "\nGender:" +
-              character.gender +
-              "\nAge:" +
-              character.age +
-              "\nHeight:" +
-              character.height +
-              "\nWeight:" +
-              character.weight +
-              "\neyeColor:" +
-              character.eyeColor +
-              "\nskinColor:" +
-              character.skinColor +
-              "\nhairColor:" +
-              character.hairColor +
-              "\ndescription:" +
-              character.description +
-              "\nallies:" +
-              character.allies +
-              "\nnotes:" +
-              character.notes +
-              "\ntraits:" +
-              character.traits +
-              "\nequipment:" +
-              character.equipment +
-              "\nHistory:" +
-              character.history,
-          }),
-        }
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-        setGeneratedImageUrl(`data:image/png;base64,${data.imagem_base64}`);
-      } else {
-        console.error("Failed to generate image:", response.statusText);
-        setGeneratedImageUrl("");
-      }
-    } catch (error) {
-      console.error("Error generating image:", error);
+      const response = await api.post('/api/gerar-imagem', {
+        prompt:
+          "Make an image for a D&D character using this information as base:" +
+          "\nName:" +
+          character.name +
+          "\nClass:" +
+          character.class +
+          "\nRace:" +
+          character.race +
+          "\nGender:" +
+          character.gender +
+          "\nAge:" +
+          character.age +
+          "\nHeight:" +
+          character.height +
+          "\nWeight:" +
+          character.weight +
+          "\neyeColor:" +
+          character.eyeColor +
+          "\nskinColor:" +
+          character.skinColor +
+          "\nhairColor:" +
+          character.hairColor +
+          "\ndescription:" +
+          character.description +
+          "\nallies:" +
+          character.allies +
+          "\nnotes:" +
+          character.notes +
+          "\ntraits:" +
+          character.traits +
+          "\nequipment:" +
+          character.equipment +
+          "\nHistory:" +
+          character.history,
+      });
+      console.log(response)
+    if (response.data && response.data.imagem_base64) {
+      setGeneratedImageUrl(`data:image/png;base64,${response.data.imagem_base64}`);
+    } else {
+      console.error("Failed to generate image:", response.data);
       setGeneratedImageUrl("");
-    } finally {
-      setIsGeneratingImage(false);
+      alert("Free account does not support image creation");
     }
+  } catch (error) {
+    console.error("Error generating image:", error);
+    setGeneratedImageUrl("");
+  } finally {
+    setIsGeneratingImage(false);
+  }
   };
 
   const resetCharacter = () => {
