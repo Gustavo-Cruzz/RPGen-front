@@ -41,22 +41,15 @@ const MyCharactersPage = () => {
         <Link to="/" className="nav-link">
           {t('homepage')}
         </Link>
-<<<<<<< dark_mode
-
         <div style={{ display: "flex", gap: "1rem" }}>
           <button onClick={toggleTheme} className="logout-button">
             {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
           </button>
 
           <button onClick={logout} className="logout-button">
-            Logout
+          {t('logout')}
           </button>
         </div>
-=======
-        <button onClick={logout} className="logout-button">
-          {t('logout')}
-        </button>
->>>>>>> main
       </div>
 
       <h1>{t('myCharacters')}</h1>

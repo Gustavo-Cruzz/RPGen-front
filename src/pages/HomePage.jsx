@@ -6,11 +6,8 @@ import "./HomePage.css";
 import { useTheme } from "../hooks/ThemeContext"; // <- Corrigido o caminho
 
 const HomePage = () => {
-<<<<<<< dark_mode
   const { theme, toggleTheme } = useTheme();
-=======
   const { t } = useLanguage();
->>>>>>> main
 
   return (
     <div className="home-container">

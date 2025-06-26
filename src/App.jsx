@@ -13,13 +13,10 @@ import { ThemeProvider } from "./hooks/ThemeContext"; // <- Importa o ThemeProvi
 
 function App() {
   return (
-<<<<<<< dark_mode
+
     <ThemeProvider> {/* <- Envolve tudo com ThemeProvider */}
       <Router>
-=======
-    <Router>
       <LanguageProvider>
->>>>>>> main
         <AuthProvider>
           <Routes>
             {/* Rotas públicas */}
@@ -27,11 +24,8 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
 
-<<<<<<< dark_mode
+
             {/* Rotas protegidas */}
-=======
-            {/* Rotas protegidas (usuário autenticado + personagens disponíveis) */}
->>>>>>> main
             <Route
               path="/my-characters"
               element={
@@ -55,13 +49,10 @@ function App() {
             />
           </Routes>
         </AuthProvider>
-<<<<<<< dark_mode
+      </LanguageProvider>
       </Router>
     </ThemeProvider>
-=======
-      </LanguageProvider>
-    </Router>
->>>>>>> main
+
   );
 }
 
