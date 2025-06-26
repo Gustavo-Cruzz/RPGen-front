@@ -171,10 +171,11 @@ const getCharacterChanges = useCallback(() => {
       });
       console.log(response)
     if (response.data && response.data.imagem_base64) {
-      // setGeneratedImageUrl(`data:image/png;base64,${response.data.imagem_base64}`);
+      setGeneratedImageUrl(`data:image/png;base64,${response.data.imagem_base64}`);
     } else {
       console.error("Failed to generate image:", response.data);
       setGeneratedImageUrl("");
+      alert("Free account does not support image creation");
     }
   } catch (error) {
     console.error("Error generating image:", error);
