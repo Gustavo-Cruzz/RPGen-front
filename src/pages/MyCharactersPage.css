@@ -37,7 +37,7 @@
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
 }
 
 .nav-link:hover {
@@ -55,7 +55,7 @@
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
 }
 
 .characters-grid {

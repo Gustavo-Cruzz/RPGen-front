@@ -1,10 +1,10 @@
 :root {
-  --dnd-red: #58180D;
-  --dnd-gold: #C9AD6A;
-  --dnd-parchment: #F2E5BC;
-  --dnd-metallic: #E0E0E0;
-  --dnd-light: #E8D8C3;
-  --dnd-border: #3C2F1E;
+  --dnd-red: #58180d;
+  --dnd-gold: #c9ad6a;
+  --dnd-parchment: #f2e5bc;
+  --dnd-metallic: #e0e0e0;
+  --dnd-light: #e8d8c3;
+  --dnd-border: #3c2f1e;
 }
 
 .creator-container {
@@ -29,7 +29,7 @@
 body {
   background-color: var(--dnd-light);
   color: var(--dnd-red);
-  background-image: url('https://www.dndbeyond.com/content/1-0-1589-0/skins/waterdeep/images/background-texture.png');
+  background-image: url("https://www.dndbeyond.com/content/1-0-1589-0/skins/waterdeep/images/background-texture.png");
   background-attachment: fixed;
 }
 
@@ -48,11 +48,13 @@ header {
   border-bottom: 3px double var(--dnd-border);
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   color: var(--dnd-red);
   font-family: "Modesto Condensed", "Palatino Linotype", serif;
   font-weight: 700;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
@@ -78,20 +80,20 @@ h3 {
   background-color: #f3ecd9;
   padding: 30px;
   border-radius: 4px;
-  box-shadow:
-    0 0 20px rgba(87, 60, 30, 0.4),
+  box-shadow: 0 0 20px rgba(87, 60, 30, 0.4),
     inset 0 0 25px rgba(145, 115, 80, 0.2);
   border: 3px ridge #c2a679;
 
-  background-image:
-    linear-gradient(to bottom right,
+  background-image: linear-gradient(
+      to bottom right,
       rgba(243, 236, 217, 0.95),
-      rgba(235, 221, 187, 0.9)),
-    url('https://www.transparenttextures.com/patterns/paper-fibers.png'); /* More papyrus-like texture */
+      rgba(235, 221, 187, 0.9)
+    ),
+    url("https://www.transparenttextures.com/patterns/paper-fibers.png"); /* More papyrus-like texture */
   background-blend-mode: multiply;
   background-size: cover;
   filter: contrast(1.05) sepia(0.1);
-  font-family: 'Papyrus', 'Cochin', 'Georgia', serif;
+  font-family: "Papyrus", "Cochin", "Georgia", serif;
 
   position: relative;
   overflow: hidden;
@@ -154,44 +156,55 @@ textarea {
   font-family: "Modesto Condensed", serif;
   letter-spacing: 1px;
   text-transform: uppercase;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .save-btn:hover {
-  background-color: #6D2013;
+  background-color: #6d2013;
 }
 
-.generation-section{
+.generation-section {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.generation-section h2{
+.generation-section h2 {
   width: 100%;
 }
 
-.generate-btn, .download-btn {
+.button-group {
+  width: 80%;
+  display: flex;
+  column-gap: 2%;
+  height: 100%;
+  align-items: center;
+  margin-left: 2rem;
+}
+
+.generate-btn,
+.download-btn {
   background-color: var(--dnd-red);
   color: var(--dnd-parchment);
-  border: 2px solid var(--dnd-gold);
   padding: 10px 20px;
   border-radius: 0;
   cursor: pointer;
   font-weight: 700;
   font-family: "Modesto Condensed", serif;
-  margin-right: 10px;
-  margin-bottom: 10px;
   letter-spacing: 0.5px;
 }
+.generate-btn {
+  border: 2px solid var(--dnd-gold);
+}
 
-.generate-btn:hover, .download-btn:hover {
-  background-color: #6D2013;
+.generate-btn:hover,
+.download-btn:hover {
+  background-color: #6d2013;
 }
 
 .generate-btn:disabled {
-  background-color: #8B8B8B;
-  border-color: #CCCCCC;
+  background-color: #8b8b8b;
+  border-color: #cccccc;
 }
 
 .generated-output {
@@ -231,6 +244,27 @@ textarea {
   .form-row {
     flex-direction: column;
   }
+
+  .button-group {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    margin-bottom: 10px;
+  }
+  .button-group .generate-btn {
+    margin: 0;
+    width: 100%;
+  }
+  .generated-image {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .download-btn {
+    width: 80%;
+    margin: 0;
+  }
 }
 
 .intro-container {
@@ -251,7 +285,7 @@ textarea {
 
 .typing-text {
   font-size: 2.5rem;
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
   font-weight: bold;
   margin-bottom: 20px;
 }
@@ -262,38 +296,42 @@ textarea {
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 /* Tema escuro */
 [data-theme="dark"] {
-  --dnd-red: #FFCCBC;
-  --dnd-gold: #FFE082;
-  --dnd-parchment: #2E2E2E;
-  --dnd-metallic: #9E9E9E;
-  --dnd-light: #1E1E1E;
-  --dnd-border: #8D6E63;
+  --dnd-red: #ffccbc;
+  --dnd-gold: #ffe082;
+  --dnd-parchment: #2e2e2e;
+  --dnd-metallic: #9e9e9e;
+  --dnd-light: #1e1e1e;
+  --dnd-border: #8d6e63;
 }
 
 [data-theme="dark"] body {
   background-color: var(--dnd-light);
   color: var(--dnd-red);
-  background-image: url('https://www.transparenttextures.com/patterns/asfalt-light.png');
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
 }
 
 [data-theme="dark"] .character-sheet {
   background-color: #2b2b2b;
-  box-shadow:
-    0 0 20px rgba(0, 0, 0, 0.4),
-    inset 0 0 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4), inset 0 0 25px rgba(0, 0, 0, 0.2);
   border: 3px ridge var(--dnd-border);
 
-  background-image:
-    linear-gradient(to bottom right,
+  background-image: linear-gradient(
+      to bottom right,
       rgba(30, 30, 30, 0.95),
-      rgba(45, 45, 45, 0.9)),
-    url('https://www.transparenttextures.com/patterns/dark-mosaic.png');
+      rgba(45, 45, 45, 0.9)
+    ),
+    url("https://www.transparenttextures.com/patterns/dark-mosaic.png");
 }
 
 [data-theme="dark"] input,
@@ -315,7 +353,7 @@ textarea {
 }
 
 [data-theme="dark"] .download-btn:hover {
-  background-color: #5D4037;
+  background-color: #5d4037;
 }
 
 [data-theme="dark"] .generate-btn {
@@ -325,7 +363,7 @@ textarea {
 }
 
 [data-theme="dark"] .generate-btn:hover {
-  background-color: #5D4037;
+  background-color: #5d4037;
 }
 
 [data-theme="dark"] .save-btn {
@@ -334,5 +372,5 @@ textarea {
 }
 
 [data-theme="dark"] .save-btn:hover {
-  background-color: #4E342E;
+  background-color: #4e342e;
 }
