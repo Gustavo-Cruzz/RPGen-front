@@ -95,4 +95,40 @@
   text-align: center;
 }
 
+/* Tema escuro */
+[data-theme="dark"] .auth-container {
+  background-color: #2E2E2E;
+  border: 3px ridge var(--dnd-gold);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .auth-header h1,
+[data-theme="dark"] .auth-header h2,
+[data-theme="dark"] .auth-footer,
+[data-theme="dark"] .auth-link {
+  color: var(--dnd-gold);
+}
+
+[data-theme="dark"] .auth-header h2 {
+  border-bottom: 2px solid var(--dnd-gold);
+}
+
+[data-theme="dark"] .auth-button {
+  background-color: var(--dnd-border);
+  color: var(--dnd-gold);
+}
+
+[data-theme="dark"] .auth-button:hover {
+  background-color: #5D4037;
+}
+
+[data-theme="dark"] .auth-link:hover {
+  text-decoration: underline;
+}
+
+[data-theme="dark"] .auth-error {
+  background-color: #3b1e1e;
+  color: #ffcdd2;
+  border: 1px solid #c62828;
+}
 

@@ -263,3 +263,74 @@ textarea {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
+
+/* Tema escuro */
+[data-theme="dark"] {
+  --dnd-red: #FFCCBC;
+  --dnd-gold: #FFE082;
+  --dnd-parchment: #2E2E2E;
+  --dnd-metallic: #9E9E9E;
+  --dnd-light: #1E1E1E;
+  --dnd-border: #8D6E63;
+}
+
+[data-theme="dark"] body {
+  background-color: var(--dnd-light);
+  color: var(--dnd-red);
+  background-image: url('https://www.transparenttextures.com/patterns/asfalt-light.png');
+}
+
+[data-theme="dark"] .character-sheet {
+  background-color: #2b2b2b;
+  box-shadow:
+    0 0 20px rgba(0, 0, 0, 0.4),
+    inset 0 0 25px rgba(0, 0, 0, 0.2);
+  border: 3px ridge var(--dnd-border);
+
+  background-image:
+    linear-gradient(to bottom right,
+      rgba(30, 30, 30, 0.95),
+      rgba(45, 45, 45, 0.9)),
+    url('https://www.transparenttextures.com/patterns/dark-mosaic.png');
+}
+
+[data-theme="dark"] input,
+[data-theme="dark"] textarea {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--dnd-gold);
+  border: 1px solid var(--dnd-border);
+}
+
+[data-theme="dark"] .generated-output {
+  background-color: rgba(46, 46, 46, 0.9);
+  border-left: 4px solid var(--dnd-gold);
+  color: var(--dnd-gold);
+}
+
+[data-theme="dark"] .download-btn {
+  background-color: var(--dnd-border);
+  color: var(--dnd-gold);
+}
+
+[data-theme="dark"] .download-btn:hover {
+  background-color: #5D4037;
+}
+
+[data-theme="dark"] .generate-btn {
+  background-color: var(--dnd-border);
+  color: var(--dnd-gold);
+  border-color: var(--dnd-gold);
+}
+
+[data-theme="dark"] .generate-btn:hover {
+  background-color: #5D4037;
+}
+
+[data-theme="dark"] .save-btn {
+  background-color: var(--dnd-border);
+  color: var(--dnd-gold);
+}
+
+[data-theme="dark"] .save-btn:hover {
+  background-color: #4E342E;
+}

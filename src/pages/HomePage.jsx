@@ -3,9 +3,14 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext";
 import LanguageSelector from "../components/LanguageSelector";
 import "./HomePage.css";
+import { useTheme } from "../hooks/ThemeContext"; // <- Corrigido o caminho
 
 const HomePage = () => {
+<<<<<<< dark_mode
+  const { theme, toggleTheme } = useTheme();
+=======
   const { t } = useLanguage();
+>>>>>>> main
 
   return (
     <div className="home-container">
@@ -18,6 +23,15 @@ const HomePage = () => {
         <p>
           {t('appDescription')}
         </p>
+
+        {/* Botão de alternância de tema */}
+        <button
+          onClick={toggleTheme}
+          className="auth-button"
+          style={{ marginTop: "1rem" }}
+        >
+          {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+        </button>
       </div>
 
       <div className="auth-options">

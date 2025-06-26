@@ -90,3 +90,40 @@
   background-color: rgba(201, 173, 106, 0.2);
   border: 2px dashed var(--dnd-gold);
 }
+
+/* Tema escuro */
+[data-theme="dark"] .my-characters-container {
+  background-color: var(--dnd-light);
+  color: var(--dnd-gold);
+}
+
+[data-theme="dark"] .nav-link,
+[data-theme="dark"] .logout-button {
+  background-color: var(--dnd-border);
+  color: var(--dnd-gold);
+}
+
+[data-theme="dark"] .nav-link:hover,
+[data-theme="dark"] .logout-button:hover {
+  text-decoration: underline;
+  background-color: #5D4037;
+}
+
+[data-theme="dark"] .character-card,
+[data-theme="dark"] .new-character-card {
+  background-color: #2E2E2E;
+  border: 2px solid var(--dnd-gold);
+  color: var(--dnd-gold);
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+[data-theme="dark"] .new-character-card {
+  background-color: rgba(255, 235, 150, 0.1);
+  border: 2px dashed var(--dnd-gold);
+}
+
+[data-theme="dark"] .character-card:hover,
+[data-theme="dark"] .new-character-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
