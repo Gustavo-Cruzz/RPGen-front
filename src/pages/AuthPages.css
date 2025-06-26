@@ -17,6 +17,12 @@
   box-shadow: 0 0 20px rgba(87, 60, 30, 0.4);
 }
 
+.language-selector-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
 .auth-header {
   text-align: center;
   margin-bottom: 2rem;

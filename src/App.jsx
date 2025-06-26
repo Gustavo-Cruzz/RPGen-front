@@ -7,13 +7,19 @@ import MyCharactersPage from "./pages/MyCharactersPage";
 import CharacterCreatorPage from "./pages/CharacterCreatorPage/CharacterCreatorPage";
 import { AuthProvider } from "./context/AuthContext";
 import { CharactersProvider } from "./context/CharactersContext";
+import { LanguageProvider } from "./context/LanguageContext";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import { ThemeProvider } from "./hooks/ThemeContext"; // <- Importa o ThemeProvider
 
 function App() {
   return (
+<<<<<<< dark_mode
     <ThemeProvider> {/* <- Envolve tudo com ThemeProvider */}
       <Router>
+=======
+    <Router>
+      <LanguageProvider>
+>>>>>>> main
         <AuthProvider>
           <Routes>
             {/* Rotas públicas */}
@@ -21,7 +27,11 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
 
+<<<<<<< dark_mode
             {/* Rotas protegidas */}
+=======
+            {/* Rotas protegidas (usuário autenticado + personagens disponíveis) */}
+>>>>>>> main
             <Route
               path="/my-characters"
               element={
@@ -45,8 +55,13 @@ function App() {
             />
           </Routes>
         </AuthProvider>
+<<<<<<< dark_mode
       </Router>
     </ThemeProvider>
+=======
+      </LanguageProvider>
+    </Router>
+>>>>>>> main
   );
 }
 

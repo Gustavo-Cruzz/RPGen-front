@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { CharactersContext } from "../../context/CharactersContext";
+import { useLanguage } from "../../context/LanguageContext";
+import LanguageSelector from "../../components/LanguageSelector";
 import CharacterSheet from "./components/characterSheet/CharacterSheet";
 import { useCharacter, initialCharacterState } from "../../hooks/useCharacter";
 import ImportExportButtons from "./components/ImportExportButtons";
@@ -17,6 +19,9 @@ const CharacterCreatorPage = () => {
     deleteCharacter,
     getCharacterById,
   } = useContext(CharactersContext);
+
+  // Acesso às traduções
+  const { t } = useLanguage();
 
   const {
     character,
@@ -118,7 +123,7 @@ const CharacterCreatorPage = () => {
       return;
     }
 
-    if (window.confirm("Você tem certeza que deseja deletar este personagem? Esta ação não pode ser desfeita.")) {
+    if (window.confirm(t('deleteConfirmation'))) {
       try {
         await deleteCharacter(characterId);
         navigate("/my-characters");
@@ -133,16 +138,20 @@ const CharacterCreatorPage = () => {
   if (isLoading) {
     return (
       <div className="creator-container">
-        <h1>Carregando Personagem...</h1>
+        <h1>{t('loadingCharacter')}</h1>
       </div>
     );
   }
 
   return (
     <div className="creator-container">
+      <div className="language-selector-container">
+        <LanguageSelector />
+      </div>
+      
       <div className="header-nav">
         <Link to="/my-characters" className="nav-link">
-          Back to My Characters
+          {t('backToMyCharacters')}
         </Link>
         <ImportExportButtons
            onExport={exportCharacter}
@@ -150,21 +159,21 @@ const CharacterCreatorPage = () => {
            character={character}
         />
         <button onClick={logout} className="logout-button">
-          Logout
+          {t('logout')}
         </button>
       </div>
 
-      <h1>{newCharacter ? "Create Character" : "Update Character"}</h1>
+      <h1>{newCharacter ? t('createCharacter') : t('updateCharacter')}</h1>
 
       <div className="template-selector">
-        <h2>Choose your template:</h2>
+        <h2>{t('chooseTemplate')}</h2>
         <div className="template-options">
-          <button className="template-option active">DnD</button>
-          <button className="template-option" disabled>
-            Pathfinder (coming soon)
+          <button className="generate-btn">DnD</button>
+          <button className="generate-btn" disabled>
+            {t('pathfinderComingSoon')}
           </button>
-          <button className="template-option" disabled>
-            Call of Cthulhu (coming soon)
+          <button className="generate-btn" disabled>
+            {t('cthulhuComingSoon')}
           </button>
         </div>
       </div>
@@ -180,11 +189,11 @@ const CharacterCreatorPage = () => {
         generatedImageUrl={generatedImageUrl}
       />
 
-      <button onClick={handleSave} className="save-button">
-        {newCharacter ? "Save Character" : "Save Changes"}
+      <button onClick={handleSave} className="generate-btn">
+        {newCharacter ? t('saveCharacter') : t('saveChanges')}
       </button>
-      <button onClick={handleDelete} className="save-button delete-button">
-        {newCharacter ? "Cancel" : "Delete Character"}
+      <button onClick={handleDelete} className="generate-btn">
+        {newCharacter ? t('cancel') : t('deleteCharacter')}
       </button>
     </div>
   );

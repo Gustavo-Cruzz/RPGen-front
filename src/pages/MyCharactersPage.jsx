@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { CharactersContext } from "../context/CharactersContext";
 import { AuthContext } from "../context/AuthContext";
 import { useTheme } from "../hooks/ThemeContext";
+import { useLanguage } from "../context/LanguageContext";
+import LanguageSelector from "../components/LanguageSelector";
 import "./MyCharactersPage.css";
 
 const MyCharactersPage = () => {
@@ -18,20 +20,28 @@ const MyCharactersPage = () => {
   }, [fetchCharacters]);
 
   const { logout } = useContext(AuthContext);
+  
+  // Acesso às traduções
+  const { t } = useLanguage();
 
   const { theme, toggleTheme } = useTheme();
 
   if (loading) {
-    return <div>Carregando personagens...</div>;
+    return <div>{t('loadingCharacters')}</div>;
   }
 
   return (
     <div className="my-characters-container">
+      <div className="language-selector-container">
+        <LanguageSelector />
+      </div>
+      
       {/* Barra de navegação superior */}
       <div className="header-nav">
         <Link to="/" className="nav-link">
-          Homepage
+          {t('homepage')}
         </Link>
+<<<<<<< dark_mode
 
         <div style={{ display: "flex", gap: "1rem" }}>
           <button onClick={toggleTheme} className="logout-button">
@@ -42,18 +52,23 @@ const MyCharactersPage = () => {
             Logout
           </button>
         </div>
+=======
+        <button onClick={logout} className="logout-button">
+          {t('logout')}
+        </button>
+>>>>>>> main
       </div>
 
-      <h1>Meus personagens</h1>
+      <h1>{t('myCharacters')}</h1>
       <h2>
-        Número de personagens: {numCharacters}/{maxCharacters}
+        {t('numberOfCharacters')}: {numCharacters}/{maxCharacters}
       </h2>
 
       {/* Grade com os personagens */}
       <div className="characters-grid">
         {numCharacters < maxCharacters && (
           <Link to="/character/new" className="new-character-card">
-            + Criar novo personagem
+            + {t('createNewCharacter')}
           </Link>
         )}
 

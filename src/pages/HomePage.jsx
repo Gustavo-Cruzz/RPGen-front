@@ -1,17 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../context/LanguageContext";
+import LanguageSelector from "../components/LanguageSelector";
 import "./HomePage.css";
 import { useTheme } from "../hooks/ThemeContext"; // <- Corrigido o caminho
 
 const HomePage = () => {
+<<<<<<< dark_mode
   const { theme, toggleTheme } = useTheme();
+=======
+  const { t } = useLanguage();
+>>>>>>> main
 
   return (
     <div className="home-container">
+      <div className="language-selector-container">
+        <LanguageSelector />
+      </div>
+      
       <div className="app-header">
-        <h1>RPGen</h1>
+        <h1>{t('appTitle')}</h1>
         <p>
-          An online RPG character creator, powered by Artificial Intelligence
+          {t('appDescription')}
         </p>
 
         {/* Botão de alternância de tema */}
@@ -26,20 +36,19 @@ const HomePage = () => {
 
       <div className="auth-options">
         <div className="auth-box">
-          <h3>New here?</h3>
+          <h3>{t('newHere')}</h3>
           <p>
-            Then what are you waiting for? Create your account and have fun with
-            your characters!
+            {t('newHereDescription')}
           </p>
           <Link to="/register" className="auth-button">
-            Register
+            {t('register')}
           </Link>
         </div>
         <div className="auth-box">
-          <h3>Already have an account?</h3>
-          <p>Great, then login to view your characters! Let the fun begin!</p>
+          <h3>{t('alreadyHaveAccount')}</h3>
+          <p>{t('alreadyHaveAccountDescription')}</p>
           <Link to="/login" className="auth-button">
-            Login
+            {t('login')}
           </Link>
         </div>
       </div>
